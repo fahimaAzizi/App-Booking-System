@@ -32,6 +32,9 @@ const ListRoom = () => {
               </th>
             </tr>
           </thead>
+          <tbody className="text-sm">
+
+          </tbody>
         </table>
       </div>
     </div>
