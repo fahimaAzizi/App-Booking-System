@@ -33,6 +33,13 @@ const ListRoom = () => {
             </tr>
           </thead>
           <tbody className="text-sm">
+            {
+              rooms.map(()=>(
+                <tr key={index}>
+
+                </tr>
+              ))
+            }
 
           </tbody>
         </table>
