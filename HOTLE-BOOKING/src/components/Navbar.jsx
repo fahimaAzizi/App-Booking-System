@@ -1,3 +1,4 @@
+import React from "react";
 const App = () => {
     const navLinks = [
         { name: 'Home', path: '/' },
