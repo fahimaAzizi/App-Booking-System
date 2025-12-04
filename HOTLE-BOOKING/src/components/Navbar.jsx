@@ -73,7 +73,7 @@ const App = () => {
                     ))}
 
                     <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all">
-                        New Launch
+                       Dashboard
                     </button>
 
                     <button className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500">
