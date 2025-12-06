@@ -1,5 +1,7 @@
 import React from "react";
-const App = () => {
+import { Link } from "react-router-dom";
+import {assets} from "../assets/assets"
+const Navbar = () => {
     const navLinks = [
         { name: 'Home', path: '/' },
         { name: 'Hotels', path: '/' },
@@ -84,3 +86,4 @@ const App = () => {
         </div>
     );
 }
+export default Navbar;
