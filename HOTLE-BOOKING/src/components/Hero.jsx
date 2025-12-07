@@ -1,14 +1,25 @@
-import React from 'react'
+import React from "react";
 
 const Hero = () => {
   return (
-    <div className='flex flex-col items-start justify-center px-6 md:px-32 text-white bg-[url("/src/assets/heroImage.png")]
-     bg-no-repeat bg-cover bg-center h-screen'>
-     <p>The Ultimate Hotel Experience</p>
-     <H1>Discover your perfect gateway destiination</H1>
-     <P>Unparalleled luxury and comfort awiat at the world's most exclusive hotels and resorts. Start your journey today.  </P>
-    </div>
-  )
-}
+    <div
+      className='flex flex-col items-start justify-center px-6 md:px-16 lg:px-24 xl:px-32 
+      text-white bg-[url("/src/assets/heroImage.png")] bg-no-repeat bg-cover bg-center h-screen'
+    >
+      <p className="bg-[#4989FF]/50 px-3.5 py-1 rounded-full mt-20">
+        The Ultimate Hotel Experience
+      </p>
 
-export default Hero
+      <h1 className="font-playfair text-2xl md:text-5xl md:text-[56px] md:leading-[56px] font-bold md:font-extrabold max-w-xl mt-4">
+        Discover Your Perfect Gateway Destination
+      </h1>
+
+      <p className="max-w-[430px] mt-2 text-sm md:text-base">
+        Unparalleled luxury and comfort await at the world’s most exclusive
+        hotels and resorts. Start your journey today.
+      </p>
+    </div>
+  );
+};
+
+export default Hero;
