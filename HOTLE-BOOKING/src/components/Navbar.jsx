@@ -119,7 +119,14 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu Button */}
+
       <div className="flex items-center md:hidden">
+        {user &&
+         <UserButton>
+          <UserButton.MenuItems>
+            <UserButton.Action label="My Bookings" labelIcon={<BookIcon/>} onClick={()=> navigate('/my-bookings ')}/>
+          </UserButton.MenuItems>
+        </UserButton>}
         <img
           src={assets.menuIcon}
           alt="menu"
@@ -151,7 +158,8 @@ const Navbar = () => {
           </Link>
         ))}
 
-       <button className="border border-black px-4 py-1 rounded-full">Dashboard</button>
+       { user && <button className="border border-black px-4 py-1 rounded-full"
+       onClick ={()=> navigate('/owner')}>Dashboard</button>}
 
        {!user && <button onClick={openSignIn} className="bg-black text-white px-8 py-2.5 rounded-full">
           Login
