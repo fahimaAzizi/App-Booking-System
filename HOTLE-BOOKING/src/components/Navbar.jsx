@@ -1,7 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useClerk, useUser, UserButton } from "@clerk/clerk-react";
+
+const BookIcon = () => (
+  <svg
+    className="w-4 h-4 text-gray-700"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    fill="none"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2v0Zm0 2h12m9 0v0"
+    />
+  </svg>
+);
+
+
 const Navbar = () => {
   const navLinks = [
     { name: "Home", path: "/" },
@@ -12,8 +34,10 @@ const Navbar = () => {
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const {openSingIn} = useClerk()
+  const {openSignIn} = useClerk()
   const {user} = useUser()
+  const navigate = useNavigate()
+  const location  = useLocation()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,12 +80,14 @@ const Navbar = () => {
           </Link>
         ))}
 
+        {user &&
+        
         <button
           className={`border px-4 py-1 text-sm font-light rounded-full transition-all duration-300 
             ${isScrolled ? "text-black border-black" : "text-white border-white"}`}
         >
           Dashboard
-        </button>
+        </button>}
       </div>
 
       {/* Desktop Right Icons */}
@@ -72,12 +98,22 @@ const Navbar = () => {
           className={`${isScrolled && "invert"} h-7 transition-all duration-500`}
         />
 
-        <button onClick={openSingIn}
+        {user ? 
+        (<UserButton>
+          <UserButton.MenuItems>
+            <UserButton.Action label="My Bookings" labelIcon={<BookIcon/>} onClick={()=> navigate('/my-bookings ')}/>
+          </UserButton.MenuItems>
+        </UserButton>)
+      :
+      ( <button onClick={openSignIn}
           className={`px-8 py-2.5 rounded-full ml-2 transition-all duration-500 
             ${isScrolled ? "bg-black text-white" : "bg-white text-black"}`}
         >
           Login
-        </button>
+        </button>)
+      }
+
+       
       </div>
 
       {/* Mobile Menu Button */}
@@ -113,11 +149,12 @@ const Navbar = () => {
           </Link>
         ))}
 
-        <button className="border border-black px-4 py-1 rounded-full">Dashboard</button>
+       <button className="border border-black px-4 py-1 rounded-full">Dashboard</button>
 
-        <button onClick={openSingIn} className="bg-black text-white px-8 py-2.5 rounded-full">
+       {!user && <button onClick={openSignIn} className="bg-black text-white px-8 py-2.5 rounded-full">
           Login
-        </button>
+        </button>}
+      
       </div>
     </nav>
   );
