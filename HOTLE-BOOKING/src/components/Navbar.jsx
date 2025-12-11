@@ -84,7 +84,8 @@ const Navbar = () => {
         
         <button
           className={`border px-4 py-1 text-sm font-light rounded-full transition-all duration-300 
-            ${isScrolled ? "text-black border-black" : "text-white border-white"}`}
+            ${isScrolled ? "text-black border-black" : "text-white border-white"}`
+          } onClick ={()=> navigate('/owner')}
         >
           Dashboard
         </button>}
@@ -108,7 +109,8 @@ const Navbar = () => {
       ( <button onClick={openSignIn}
           className={`px-8 py-2.5 rounded-full ml-2 transition-all duration-500 
             ${isScrolled ? "bg-black text-white" : "bg-white text-black"}`}
-        >
+            >
+          
           Login
         </button>)
       }
