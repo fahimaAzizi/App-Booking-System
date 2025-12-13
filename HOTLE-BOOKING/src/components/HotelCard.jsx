@@ -15,11 +15,11 @@ const HotelCard = ({room , index}) => {
                 4.5
             </div>
         </div>
-        <div>
+        <div className='flex items-center gap-1 text-sm'>
           <img src={assets.locationIcon} alt=" location-icon" />
           <span>{room.hotel.address}</span>
         </div>
-         <div>
+         <div className='flex items-center justify-between mt-4'>
           <p><span className='text-xl text-gray-800'>
           ${room.pricePerNight}/night</span></p>
           <button>Book Now</button>
