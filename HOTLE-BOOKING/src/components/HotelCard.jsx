@@ -20,7 +20,8 @@ const HotelCard = ({room , index}) => {
           <span>{room.hotel.address}</span>
         </div>
          <div>
-          <p>${room.pricePerNight}/night</p>
+          <p><span className='text-xl text-gray-800'>
+          ${room.pricePerNight}/night</span></p>
           <button>Book Now</button>
          </div>
       </div>
