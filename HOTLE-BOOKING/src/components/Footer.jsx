@@ -30,7 +30,7 @@ const Footer = () => {
                 </div>
 
                 <div>
-                    <p className='text-lg text-gray-800'>SUPPORT</p>
+                    <p className='font-playfair text-lg text-gray-800'>SUPPORT</p>
                     <ul className='mt-3 flex flex-col gap-2 text-sm'>
                         <li><a href="#">Help Center</a></li>
                         <li><a href="#">Safety Information</a></li>
@@ -41,7 +41,7 @@ const Footer = () => {
                 </div>
 
                 <div className='max-w-80'>
-                    <p className='text-lg text-gray-800'>STAY UPDATED</p>
+                    <p className='font-playfair text-lg text-gray-800'>STAY UPDATED</p>
                     <p className='mt-3 text-sm'>
                         Subscribe to our newsletter for inspiration and special offers.
                     </p>
