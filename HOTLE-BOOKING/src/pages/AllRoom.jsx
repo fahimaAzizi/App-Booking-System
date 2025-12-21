@@ -1,5 +1,6 @@
 import React from 'react'
 import { roomsDummyData } from '../assets/assets'
+import StarRating from '../components/StarRating'
 
 const AllRoom = () => {
   return (
@@ -10,12 +11,16 @@ const AllRoom = () => {
             <div>
               <img onClick={()=> navigator(`/rooms/${rooms_id}`)} src={room.images[0]} alt="hotel-img" title='Viw Room Detalis ' 
               className='max-h-65 md:w-1/2 rounded-xl shadow-lg object-cover cursor-pointer' />
-              <div>
-                <p>
+              <div className='md:w-1/2 flex flex-col gap-2'>
+                <p className='text-gray-500'>
                   {room.hotel.city}
               
                 </p>
-                <p>{room.hotel.name}</p>
+                <p className='text-gary-800 text-3xl font-plyfair cursor-pointer'>{room.hotel.name}</p>
+                <div className='flex items-center'>
+                  <StarRating/>
+                  <p>200 + reviews</p>
+                </div>
               </div>
             </div>
           ))}
