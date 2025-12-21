@@ -8,8 +8,15 @@ const AllRoom = () => {
 
           {roomsDummyData.map((room)=(
             <div>
-              <img src={room.images[0]} alt="hotel-img" title='Viw Room Detalis ' 
+              <img onClick={()=> navigator(`/rooms/${rooms_id}`)} src={room.images[0]} alt="hotel-img" title='Viw Room Detalis ' 
               className='max-h-65 md:w-1/2 rounded-xl shadow-lg object-cover cursor-pointer' />
+              <div>
+                <p>
+                  {room.hotel.city}
+              
+                </p>
+                <p>{room.hotel.name}</p>
+              </div>
             </div>
           ))}
 
