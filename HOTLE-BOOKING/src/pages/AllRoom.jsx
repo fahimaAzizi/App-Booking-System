@@ -1,5 +1,5 @@
 import React from 'react'
-import { roomsDummyData } from '../assets/assets'
+import { assets, roomsDummyData } from '../assets/assets'
 import StarRating from '../components/StarRating'
 
 const AllRoom = () => {
@@ -22,6 +22,8 @@ const AllRoom = () => {
                   <p>200 + reviews</p>
                 </div>
               </div>
+              <img src={assets.locationIcon} alt="location-icon" />
+              <span>{room.hotel.address}</span>
             </div>
           ))}
 
