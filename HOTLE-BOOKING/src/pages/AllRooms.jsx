@@ -3,6 +3,27 @@ import { assets, roomsDummyData } from '../assets/assets'
 import StarRating from '../components/StarRating'
 import { useNavigate } from 'react-router-dom'
 
+const ChekBox = ({label, selected = false, onChange = () =>{}})=>{
+  return(
+    <label className='flex gap-3 items-center cursor-ponter mt-2 text-sm'>
+      <input type='chekbox' checked={selected}onChange={(e)=>onChange(e.target.checked, label)}/>
+      <span className='font-light select-noe'>{label}</span>
+
+    </label>
+  )
+  
+}
+
+const RadioButton =({label, selecte = false,onChange =()=>{}})=>{
+   return(
+    <label className='flex gap-3 items-center cursor-ponter mt-2 text-sm'>
+      <input type='radio ' name='sortOption' checked={selected}onChange={(e)=>onChange(e.target.checked, label)}/>
+      <span className='font-light select-noe'>{label}</span>
+
+    </label>
+  )
+}
+
 const AllRooms = () => {
 
   const navigate = useNavigate()
