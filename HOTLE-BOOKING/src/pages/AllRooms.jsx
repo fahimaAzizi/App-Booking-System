@@ -3,9 +3,30 @@ import { assets, roomsDummyData } from '../assets/assets'
 import StarRating from '../components/StarRating'
 import { useNavigate } from 'react-router-dom'
 
-const AllRoom = () => {
+const AllRooms = () => {
 
   const navigate = useNavigate()
+    const [openFilters, setOpenFilters] = useState(false);
+
+  const roomTypes = [
+    "Single Bed",
+    "Double Bed",
+    "Luxury Room",
+    "Family Suite",
+  ];
+
+  const priceRanges = [
+    "0 to 500",
+    "500 to 1000",
+    "1000 to 2000",
+    "2000 to 3000",
+  ];
+
+  const sortOptions = [
+    "Price Low to High",
+    "Price High to Low",
+    "Newest First",
+  ];
 
   return (
     <div className='flex flex-col-reverse lg:flex-row items-start justify-between pt-28 md:pt-36 px-4 md:px-16 lg:px-24 xl:px-32'>
@@ -63,4 +84,4 @@ const AllRoom = () => {
   )
 }
 
-export default AllRoom
+export default AllRooms
