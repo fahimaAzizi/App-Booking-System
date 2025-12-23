@@ -99,6 +99,20 @@ const AllRooms = () => {
             <span className='hidden lg:block'>CLEAR</span>
           </div>
         </div>
+         {/* FILTER BODY (THIS IS THE PART IN YOUR SCREENSHOT) */}
+        <div
+          className={`${
+            openFilters ? "h-auto" : "h-0 lg:h-auto"
+          } overflow-hidden transition-all duration-700`}
+        >
+          <div className="px-5 pt-5">
+            <p className="font-medium text-gray-800 pb-2">
+              Popular filters
+            </p>
+
+            {roomTypes}
+          </div>
+        </div>
       </div>
 
     </div>
