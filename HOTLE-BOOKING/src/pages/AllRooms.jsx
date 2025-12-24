@@ -94,7 +94,7 @@ const AllRooms = () => {
       {/* FILTERS */}
       <div className='bg-white w-80 border border-gray-300 text-gray-600 max-lg:mb-8 lg:mt-16 p-4'>
         <div className='flex justify-between items-center'>
-          <p className='text-base font-medium text-gray-800'>FILTERS</p>
+          <p className='text-base font-medium text-gray-800 pb-2'>FILTERS</p>
           <span
             className='text-xs cursor-pointer lg:hidden'
             onClick={() => setOpenFilters(!openFilters)}
