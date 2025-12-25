@@ -1,18 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { roomsDummyData } from "../assets/assets";
 
 const RoomDetails = () => {
-  const {id} = useParams()
-  const [room, setRoom] = useState(null)
-  const [mainImage , setMainImage] = useState(unll)
-  useEffect(()=>{
-    
-  })
-  return (
-    <div>
-        <h1 className='pt-5'>room</h1>
-    </div>
-  )
-}
+  const { id } = useParams();
+  const [room, setRoom] = useState(null);
+  const [mainImage, setMainImage] = useState(null);
 
-export default RoomDetails
+  useEffect(() => {
+    const room = roomsDummyData.find((room) => room._id === id);
+    room && setRoom(room);
+    room && setMainImage(room.images[0]);
+  }, [id]);
+
+  return (
+    room && (
+      <div className="py-28 md:py-35 px-4 md:px-16 lg:px-24 xl:px-32">
+        {/* Room Details */}
+        <div>
+          <h1 className="text-3xl md:text-4xl font-playfair">
+            {room.hotel.name} <span className="text-sm">({room.roomType})</span>
+          </h1>
+          <p className="text-red-500 font-medium mt-2">20% OFF</p>
+        </div>
+      </div>
+    )
+  );
+};
+
+export default RoomDetails;
