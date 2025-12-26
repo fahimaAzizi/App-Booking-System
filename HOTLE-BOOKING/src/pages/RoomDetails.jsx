@@ -36,9 +36,40 @@ return room && (
       <StarRating />
       <p className="ml-2">200+ reviews</p>
     </div>
+    {/* Room Images */}
+<div className="flex flex-col lg:flex-row mt-6 gap-6">
+
+  {/* Main Image */}
+  <div className="lg:w-1/2 w-full">
+    <img
+      src={mainImage}
+      alt="Room Image"
+      className="w-full rounded-xl shadow-lg object-cover"
+    />
+  </div>
+
+  {/* Thumbnail Images */}
+  <div className="grid grid-cols-2 gap-4 lg:w-1/2 w-full">
+    {room?.images.length > 1 &&
+      room.images.map((image, index) => (
+        <img
+          key={index}
+          src={image}
+          alt="Room Image"
+          onClick={() => setMainImage(image)}
+          className={`w-full rounded-xl shadow-md object-cover cursor-pointer
+            ${mainImage === image ? "outline outline-3 outline-orange-500" : ""}`}
+        />
+      ))}
+  </div>
+
+</div>
+
 
   </div>
+  
 )
+
 
   
 };
