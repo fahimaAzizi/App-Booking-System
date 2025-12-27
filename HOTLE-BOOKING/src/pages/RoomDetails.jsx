@@ -90,6 +90,19 @@ return room && (
   </div>
 
 </div>
+{/* CheckIn CheckOut Form */}
+<form className="flex flex-col md:flex-row items-start md:items-center justify-between 
+bg-white shadow-[0px_0px_20px_rgba(0,0,0,0.15)] p-6 rounded-xl 
+mx-auto mt-16 max-w-6xl gap-6">
+
+  {/* CHECK IN */}
+  <div className="flex flex-col">
+    <label className="text-sm text-gray-600 mb-1">Check In</label>
+    <input
+      type="date"
+      className="border border-gray-300 rounded-md px-3 py-2 outline-none"
+    />
+  </div>
 
 
   </div>
