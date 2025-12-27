@@ -113,6 +113,30 @@ mx-auto mt-16 max-w-6xl gap-6">
     />
   </div>
 
+  {/* GUESTS */}
+  <div className="flex flex-col">
+    <label className="text-sm text-gray-600 mb-1">Guests</label>
+    <select className="border border-gray-300 rounded-md px-3 py-2 outline-none">
+      <option>1 Guest</option>
+      <option>2 Guests</option>
+      <option>3 Guests</option>
+      <option>4 Guests</option>
+    </select>
+  </div>
+
+  {/* BOOK NOW BUTTON */}
+  <button
+    type="submit"
+    className="bg-primary hover:bg-primary-dull active:scale-95 transition-all
+    text-white rounded-md px-10 py-3 text-base cursor-pointer
+    max-md:w-full max-md:mt-4"
+  >
+    Book Now
+  </button>
+
+</form>
+
+
 
   </div>
   
