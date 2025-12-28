@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { roomsDummyData, facilityIcons } from "../assets/assets";
+import { roomsDummyData, facilityIcons, roomCommonData } from "../assets/assets";
 import StarRating from "../components/StarRating";
 
 const RoomDetails = () => {
@@ -147,6 +147,13 @@ const RoomDetails = () => {
           Ckeck Availability
         </button>
       </form>
+      <div>
+        {roomCommonData.map(()=>(
+          <div key={index} className="flex items-start gap-2">
+            <img src={speechSynthesis.icon} alt="" />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
