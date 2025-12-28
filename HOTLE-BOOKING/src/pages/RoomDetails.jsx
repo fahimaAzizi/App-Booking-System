@@ -91,52 +91,70 @@ return room && (
 
 </div>
 {/* CheckIn CheckOut Form */}
-<form className="flex flex-col md:flex-row items-start md:items-center justify-between 
-bg-white shadow-[0px_0px_20px_rgba(0,0,0,0.15)] p-6 rounded-xl 
-mx-auto mt-16 max-w-6xl gap-6">
+<form
+  className="flex flex-col md:flex-row items-start md:items-center justify-between 
+  bg-white shadow-[0px_0px_20px_rgba(0,0,0,0.15)] p-6 rounded-xl 
+  mx-auto mt-16 max-w-6xl"
+>
+  <div
+    className="flex flex-col flex-wrap md:flex-row items-start md:items-center 
+    gap-4 md:gap-10 text-gray-500"
+  >
+    {/* CHECK IN */}
+    <div className="flex flex-col">
+      <label htmlFor="checkInDate" className="font-medium">
+        Check-In
+      </label>
+      <input
+        type="date"
+        id="checkInDate"
+        placeholder="Check-In"
+        className="w-full rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none"
+        required
+      />
+    </div>
 
-  {/* CHECK IN */}
-  <div className="flex flex-col">
-    <label className="text-sm text-gray-600 mb-1">Check In</label>
-    <input
-      type="date"
-      className="border border-gray-300 rounded-md px-3 py-2 outline-none"
-    />
+    {/* CHECK OUT */}
+    <div className="flex flex-col">
+      <label htmlFor="checkOutDate" className="font-medium">
+        Check-Out
+      </label>
+      <input
+        type="date"
+        id="checkOutDate"
+        placeholder="Check-Out"
+        className="w-full rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none"
+        required
+      />
+    </div>
+
+    {/* GUESTS */}
+    <div className="flex flex-col">
+      <label htmlFor="guests" className="font-medium">
+        Guests
+      </label>
+      <select
+        id="guests"
+        className="w-full rounded border border-gray-300 px-3 py-2 mt-1.5 outline-none"
+      >
+        <option value="1">1 Guest</option>
+        <option value="2">2 Guests</option>
+        <option value="3">3 Guests</option>
+        <option value="4">4 Guests</option>
+      </select>
+    </div>
   </div>
 
-  {/* CHECK OUT */}
-  <div className="flex flex-col">
-    <label className="text-sm text-gray-600 mb-1">Check Out</label>
-    <input
-      type="date"
-      className="border border-gray-300 rounded-md px-3 py-2 outline-none"
-    />
-  </div>
-
-  {/* GUESTS */}
-  <div className="flex flex-col">
-    <label className="text-sm text-gray-600 mb-1">Guests</label>
-    <select className="border border-gray-300 rounded-md px-3 py-2 outline-none">
-      <option>1 Guest</option>
-      <option>2 Guests</option>
-      <option>3 Guests</option>
-      <option>4 Guests</option>
-    </select>
-  </div>
-
-  {/* BOOK NOW BUTTON */}
+  {/* BUTTON */}
   <button
     type="submit"
-    className="bg-primary hover:bg-primary-dull active:scale-95 transition-all
-    text-white rounded-md px-10 py-3 text-base cursor-pointer
-    max-md:w-full max-md:mt-4"
+    className="bg-primary hover:bg-primary-dull active:scale-95 transition-all 
+    text-white rounded-md max-md:w-full max-md:mt-6 
+    md:px-25 py-3 md:py-4 text-base cursor-pointer"
   >
     Book Now
   </button>
-
 </form>
-
-
 
   </div>
   
