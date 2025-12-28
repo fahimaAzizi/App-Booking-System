@@ -144,7 +144,7 @@ const RoomDetails = () => {
           px-8 py-3 rounded-md transition-all active:scale-95
           w-full md:w-auto"
         >
-          Book Now
+          Ckeck Availability
         </button>
       </form>
     </div>
