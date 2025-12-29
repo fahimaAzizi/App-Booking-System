@@ -161,7 +161,7 @@ const RoomDetails = () => {
         allocated on the ground floor according to availability.
 
       </div>
-      {/* hosted by */}
+
       {/* Hosted by */}
 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-10">
 
