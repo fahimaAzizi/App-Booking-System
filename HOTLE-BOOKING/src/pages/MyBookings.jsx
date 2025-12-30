@@ -18,6 +18,16 @@ const MyBookings = () => {
           <div>Date & Timings</div>
           <div>Payment</div>
         </div>
+         {/* Booking Item */}
+        <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr_1fr] gap-4 md:gap-0 w-full py-6 border-b border-gray-200">
+          
+          {/* Hotel Info */}
+          <div className="flex gap-4">
+            <img
+              src="https://images.unsplash.com/photo-1566073771259-6a8506099945"
+              alt="hotel"
+              className="w-28 h-20 object-cover rounded"
+            />
     </div>
   )
 }
