@@ -28,6 +28,18 @@ const MyBookings = () => {
               alt="hotel"
               className="w-28 h-20 object-cover rounded"
             />
+                        <div>
+              <p className="font-semibold">Luxury Palace Hotel</p>
+              <p className="text-sm text-gray-600">New York, USA</p>
+            </div>
+          </div>
+
+          {/* Date & Time */}
+          <div className="text-sm text-gray-600">
+            <p>Check-in: 12 Aug 2025</p>
+            <p>Check-out: 15 Aug 2025</p>
+          </div>
+
     </div>
   )
 }
