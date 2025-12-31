@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  roomsDummyData,
-  facilityIcons,
-  roomCommonData,
-} from "../assets/assets";
+import { roomsDummyData, facilityIcons, roomCommonData } from "../assets/assets";
 import StarRating from "../components/StarRating";
 
 const RoomDetails = () => {
@@ -14,7 +10,7 @@ const RoomDetails = () => {
 
   useEffect(() => {
     const selectedRoom = roomsDummyData.find(
-      (room) => room._id === id
+      (room) => room._id == id
     );
 
     if (selectedRoom) {
@@ -71,7 +67,7 @@ const RoomDetails = () => {
               className={`w-full h-[190px] object-cover rounded-xl cursor-pointer shadow-md
                 ${
                   mainImage === img
-                    ? "outline outline-4 outline-orange-500"
+                    ? "outline outline-3 outline-orange-500"
                     : ""
                 }`}
             />
@@ -86,7 +82,7 @@ const RoomDetails = () => {
         </h2>
 
         <div className="flex flex-wrap gap-4 mt-4">
-          {room.amenities.map((item, index) => (
+          {room?.amenities?.map((item, index) => (
             <div
               key={index}
               className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-lg"
@@ -110,6 +106,7 @@ const RoomDetails = () => {
       >
         <div className="flex flex-col md:flex-row gap-6 text-gray-500">
 
+          {/* CHECK IN */}
           <div className="flex flex-col">
             <label className="font-medium">Check-In</label>
             <input
@@ -119,6 +116,7 @@ const RoomDetails = () => {
             />
           </div>
 
+          {/* CHECK OUT */}
           <div className="flex flex-col">
             <label className="font-medium">Check-Out</label>
             <input
@@ -128,6 +126,7 @@ const RoomDetails = () => {
             />
           </div>
 
+          {/* GUESTS */}
           <div className="flex flex-col">
             <label className="font-medium">Guests</label>
             <select className="border rounded px-3 py-2 mt-1 outline-none">
@@ -145,57 +144,54 @@ const RoomDetails = () => {
           px-8 py-3 rounded-md transition-all active:scale-95
           w-full md:w-auto"
         >
-          Check Availability
+          Ckeck Availability
         </button>
       </form>
-
-      {/* ROOM COMMON INFO */}
-      <div className="mt-12 space-y-4">
-        {roomCommonData.map((item, index) => (
-          <div key={index} className="flex items-start gap-3">
-            <img src={item.icon} alt="" className="w-6 h-6 mt-1" />
-            <p className="text-gray-600 text-sm">{item.text}</p>
+      <div>
+        {roomCommonData.map(()=>(
+          <div key={index} className="flex items-start gap-2">
+            <img src={speechSynthesis.icon} alt="" />
           </div>
         ))}
       </div>
+      <div className="max-w-3xl border-y border-gray-300 my-15 py-10 text-gray-500">
+        Guests will be allocated on the ground floor according
+         to availability. You get a comfortable two-bedroom a
+         partment that has a true city feeling. The price quoted is for two guests; at the guest slot, please mark the number of guests to get the exact price for groups. Guests will be 
+        allocated on the ground floor according to availability.
 
-      {/* DESCRIPTION */}
-      <div className="max-w-3xl border-y border-gray-300 my-16 py-10 text-gray-500">
-        Guests will be allocated on the ground floor according to availability.
-        You get a comfortable two-bedroom apartment that has a true city feeling.
-        The price quoted is for two guests; please mark the number of guests to
-        get the exact price for groups.
       </div>
 
-      {/* HOST */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-10">
+      {/* Hosted by */}
+<div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mt-10">
 
-        <div className="flex gap-4">
-          <img
-            src={room.hotel.owner.image}
-            alt="Host"
-            className="h-14 w-14 rounded-full"
-          />
+  <div className="flex gap-4">
+    <img
+      src={room.hotel.owner.image}
+      alt="Host"
+      className="h-14 w-14 md:h-18 md:w-18 rounded-full"
+    />
 
-          <div>
-            <p className="text-lg md:text-xl">
-              Hosted by {room.hotel.name}
-            </p>
+    <div>
+      <p className="text-lg md:text-xl">
+        Hosted by {room.hotel.name}
+      </p>
 
-            <div className="flex items-center mt-1">
-              <StarRating />
-              <p className="ml-2">200+ reviews</p>
-            </div>
-          </div>
-        </div>
-
-        <button
-          className="px-6 py-2.5 rounded text-white bg-primary 
-          hover:bg-primary-dull transition-all"
-        >
-          Contact Now
-        </button>
+      <div className="flex items-center mt-1">
+        <StarRating />
+        <p className="ml-2">200+ reviews</p>
       </div>
+    </div>
+  </div>
+
+  <button
+    className="px-6 py-2.5 mt-4 md:mt-0 rounded text-white bg-primary 
+    hover:bg-primary-dull transition-all cursor-pointer"
+  >
+    Contact Now
+  </button>
+
+</div>
 
     </div>
   );
