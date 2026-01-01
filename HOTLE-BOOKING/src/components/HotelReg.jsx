@@ -13,6 +13,17 @@ import React from 'react'
           alt="reg-image"
           className="w-1/2 hidden md:block object-cover"
         />
+                {/* RIGHT FORM */}
+        <div className="relative flex flex-col items-center w-full md:w-1/2 p-8 md:p-10">
+
+          {/* CLOSE ICON */}
+          <img
+            src={assets.closeIcon}
+            alt="close"
+            onClick={() => setShowHotelReg(false)}
+            className="absolute top-4 right-4 h-4 w-4 cursor-pointer"
+          />
+
 
     </div>
   )
