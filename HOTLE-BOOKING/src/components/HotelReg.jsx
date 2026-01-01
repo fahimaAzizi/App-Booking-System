@@ -35,6 +35,21 @@ import React from 'react'
             className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4 outline-none"
             required
           />
+          {/* ADDRESS */}
+          <input
+            type="text"
+            placeholder="Hotel Address"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4 outline-none"
+            required
+          />
+
+          {/* CONTACT */}
+          <input
+            type="text"
+            placeholder="Contact Number"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 mb-6 outline-none"
+            required
+          />
 
     </div>
   )
