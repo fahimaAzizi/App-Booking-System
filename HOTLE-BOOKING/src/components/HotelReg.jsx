@@ -1,6 +1,7 @@
-import React from 'react'
+import React from "react";
+import { assets } from "../assets/assets";
 
-      const HotelReg = ({ setShowHotelReg }) => {
+const HotelReg = ({ setShowHotelReg }) => {
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 z-50 flex items-center justify-center bg-black/70">
 
@@ -13,7 +14,8 @@ import React from 'react'
           alt="reg-image"
           className="w-1/2 hidden md:block object-cover"
         />
-                {/* RIGHT FORM */}
+
+        {/* RIGHT FORM */}
         <div className="relative flex flex-col items-center w-full md:w-1/2 p-8 md:p-10">
 
           {/* CLOSE ICON */}
@@ -35,6 +37,7 @@ import React from 'react'
             className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4 outline-none"
             required
           />
+
           {/* ADDRESS */}
           <input
             type="text"
@@ -51,8 +54,18 @@ import React from 'react'
             required
           />
 
+          {/* SUBMIT */}
+          <button
+            type="submit"
+            className="w-full bg-primary text-white py-2 rounded-md
+            hover:bg-primary-dull transition-all active:scale-95"
+          >
+            Register Hotel
+          </button>
+        </div>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default HotelReg
+export default HotelReg;
