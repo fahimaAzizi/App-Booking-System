@@ -24,6 +24,17 @@ import React from 'react'
             className="absolute top-4 right-4 h-4 w-4 cursor-pointer"
           />
 
+          <p className="text-2xl font-semibold mb-6">
+            Register Your Hotel
+          </p>
+
+          {/* HOTEL NAME */}
+          <input
+            type="text"
+            placeholder="Hotel Name"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4 outline-none"
+            required
+          />
 
     </div>
   )
