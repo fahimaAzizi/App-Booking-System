@@ -16,7 +16,7 @@ const App = () => {
   return (
     <div>
       {!isOwnerPath && <Navbar />}
-     {true && <HotelReg />}
+     {false && <HotelReg />}
 
       <div className='min-h-[70vh]'>
         <Routes>
