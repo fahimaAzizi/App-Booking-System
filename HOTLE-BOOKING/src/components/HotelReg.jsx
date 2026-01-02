@@ -45,6 +45,27 @@ const HotelReg = ({ setShowHotelReg }) => {
             className="w-full border border-gray-300 rounded-md px-4 py-2 mb-4 outline-none"
             required
           />
+          {/* Select City */}
+<div className="w-full mt-4 max-w-60 mr-auto">
+  <label htmlFor="city" className="font-medium text-gray-500">
+    City
+  </label>
+
+  <select
+    id="city"
+    className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light"
+    required
+  >
+    <option value="">Select City</option>
+
+    {cities.map((city, index) => (
+      <option key={index} value={city}>
+        {city}
+      </option>
+    ))}
+  </select>
+</div>
+
 
           {/* CONTACT */}
           <input
