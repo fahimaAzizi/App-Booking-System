@@ -1,14 +1,14 @@
-import React from 'react'
+import { NavLink } from "react-router-dom";
+import { assets } from "../../assets/assets";
 
 const Sidebar = () => {
-  return (
-    <div>
-        const sidebarLinks = [
+  const sidebarLinks = [
     { name: "Dashboard", path: "/owner", icon: assets.dashboardIcon },
     { name: "Add Room", path: "/owner/add-room", icon: assets.addIcon },
     { name: "List Room", path: "/owner/list-room", icon: assets.listIcon },
   ];
-    return (
+
+  return (
     <div className="md:w-64 w-16 border-r h-full text-base border-gray-300 pt-4
                     flex flex-col transition-all duration-300">
 
@@ -21,9 +21,14 @@ const Sidebar = () => {
               isActive ? "bg-gray-200 font-semibold" : ""
             }`
           }
-        ></NavLink>
-    </div>
-  )
-}
+        >
+          <img src={item.icon} alt={item.name} className="w-6 h-6" />
+          <span className="hidden md:block">{item.name}</span>
+        </NavLink>
+      ))}
 
-export default Sidebar
+    </div>
+  );
+};
+
+export default Sidebar;
