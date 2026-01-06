@@ -23,8 +23,8 @@ const Sidebar = () => {
             }`
           }
         >
-          <img src={item.icon} alt={item.name} className="w-6 h-6" />
-          <span className="hidden md:block">{item.name}</span>
+          <img src={item.icon} alt={item.name} className="min-w-6 min-h-6" />
+          <span className="hidden text-center md:block ">{item.name}</span>
         </NavLink>
       ))}
 
