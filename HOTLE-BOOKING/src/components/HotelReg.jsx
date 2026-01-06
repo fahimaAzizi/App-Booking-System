@@ -49,6 +49,7 @@ const HotelReg = ({ setShowHotelReg }) => {
             className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500 font-light"
             required
           />
+          
         </div>
 
         {/* CITY */}
