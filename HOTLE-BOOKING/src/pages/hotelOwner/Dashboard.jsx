@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Title from "../components/Title";
 import { assets } from "../assets/assets";
+import { dashboardDummyData } from "../../assets/assets";
 
 const Dashboard = () => {
   // Temporary static values (later these will come from backend)
-  const totalBookings = 120;
-  const totalRevenue = "$8,450";
-  const totalRooms = 35;
+ const [dashboardData, setDashboradData] = useState(dashboardDummyData)
 
   return (
     <div className="p-6">
