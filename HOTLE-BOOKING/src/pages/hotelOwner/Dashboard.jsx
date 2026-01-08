@@ -84,6 +84,14 @@ const Dashboard = () => {
         <td className="py-3 px-4">$250</td>
         <td className="py-3 px-4 text-green-600 font-medium">Paid</td>
       </tr>
+        <tr className="border-t">
+        <td className="py-3 px-4">Sara Ahmed</td>
+        <td className="py-3 px-4 max-sm:hidden">Luxury Suite</td>
+        <td className="py-3 px-4">$420</td>
+        <td className="py-3 px-4 text-yellow-600 font-medium">
+          Pending
+        </td>
+      </tr>
 
 
       </div>
