@@ -58,7 +58,9 @@ const Dashboard = () => {
             <p className="text-xl font-semibold">{totalRooms}</p>
           </div>
         </div>
-        
+        {/* -------- Recent Bookings -------- */}
+<h2 className="text-xl text-blue-950/70 font-medium mb-5">
+  Recent Bookings
 </h2>
 
 <div className="w-full max-w-3xl text-left border border-gray-300 rounded-lg max-h-80 overflow-y-scroll">
@@ -77,14 +79,17 @@ const Dashboard = () => {
         </th>
       </tr>
     </thead>
-        {/* Dummy data (later from backend) */}
+
+    <tbody>
+      {/* Dummy data (later from backend) */}
       <tr className="border-t">
         <td className="py-3 px-4">Ali Khan</td>
         <td className="py-3 px-4 max-sm:hidden">Deluxe Room</td>
         <td className="py-3 px-4">$250</td>
         <td className="py-3 px-4 text-green-600 font-medium">Paid</td>
       </tr>
-        <tr className="border-t">
+
+      <tr className="border-t">
         <td className="py-3 px-4">Sara Ahmed</td>
         <td className="py-3 px-4 max-sm:hidden">Luxury Suite</td>
         <td className="py-3 px-4">$420</td>
@@ -92,6 +97,16 @@ const Dashboard = () => {
           Pending
         </td>
       </tr>
+
+      <tr className="border-t">
+        <td className="py-3 px-4">Usman Raza</td>
+        <td className="py-3 px-4 max-sm:hidden">Standard Room</td>
+        <td className="py-3 px-4">$180</td>
+        <td className="py-3 px-4 text-green-600 font-medium">Paid</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 
       </div>
