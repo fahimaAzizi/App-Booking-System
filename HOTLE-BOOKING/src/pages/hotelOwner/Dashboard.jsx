@@ -77,6 +77,13 @@ const Dashboard = () => {
         </th>
       </tr>
     </thead>
+        {/* Dummy data (later from backend) */}
+      <tr className="border-t">
+        <td className="py-3 px-4">Ali Khan</td>
+        <td className="py-3 px-4 max-sm:hidden">Deluxe Room</td>
+        <td className="py-3 px-4">$250</td>
+        <td className="py-3 px-4 text-green-600 font-medium">Paid</td>
+      </tr>
 
 
       </div>
