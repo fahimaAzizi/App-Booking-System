@@ -42,7 +42,7 @@ const Dashboard = () => {
           />
           <div>
             <p className="text-gray-500 text-sm">Total Revenue</p>
-            <p className="text-xl font-semibold">{totalRevenue}</p>
+            <p className="text-xl font-semibold">$ { dashboardData.totalRevenue}</p>
           </div>
         </div>
 
@@ -58,6 +58,26 @@ const Dashboard = () => {
             <p className="text-xl font-semibold">{totalRooms}</p>
           </div>
         </div>
+        
+</h2>
+
+<div className="w-full max-w-3xl text-left border border-gray-300 rounded-lg max-h-80 overflow-y-scroll">
+  <table className="w-full">
+    <thead className="bg-gray-50">
+      <tr>
+        <th className="py-3 px-4 text-gray-800 font-medium">User Name</th>
+        <th className="py-3 px-4 text-gray-800 font-medium max-sm:hidden">
+          Room Name
+        </th>
+        <th className="py-3 px-4 text-gray-800 font-medium">
+          Total Amount
+        </th>
+        <th className="py-3 px-4 text-gray-800 font-medium">
+          Payment Status
+        </th>
+      </tr>
+    </thead>
+
 
       </div>
     </div>
