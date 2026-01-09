@@ -3,7 +3,7 @@ import Title from "../components/Title";
 import { assets, dashboardDummyData } from "../assets/assets";
 
 const Dashboard = () => {
-  const [dashboardData] = useState(dashboardDummyData);
+  const [dashboardData ,setDashboardData] = useState(dashboardDummyData);
 
   return (
     <div className="p-6">
@@ -50,58 +50,11 @@ const Dashboard = () => {
 
       </div>
 
-      {/* -------- Recent Bookings -------- */}
-      <h2 className="text-xl text-blue-950/70 font-medium mb-5">
-        Recent Bookings
-      </h2>
+      
 
-      <div className="w-full max-w-3xl text-left border border-gray-300 rounded-lg max-h-80 overflow-y-scroll">
-        <table className="w-full">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="py-3 px-4 text-gray-800 font-medium">
-                User Name
-              </th>
-              <th className="py-3 px-4 text-gray-800 font-medium max-sm:hidden">
-                Room Name
-              </th>
-              <th className="py-3 px-4 text-gray-800 font-medium">
-                Total Amount
-              </th>
-              <th className="py-3 px-4 text-gray-800 font-medium">
-                Payment Status
-              </th>
-            </tr>
-          </thead>
-
-          <tbody className="text-sm">
-            {dashboardData.bookings.map((item, index) => (
-              <tr key={index} className="border-t">
-                <td className="py-3 px-4">
-                  {item.user.username}
-                </td>
-
-                <td className="py-3 px-4 max-sm:hidden">
-                  {item.room.roomType}
-                </td>
-
-                <td className="py-3 px-4">
-                  $ {item.totalPrice}
-                </td>
-
-                <td
-                  className={`py-3 px-4 font-medium ${
-                    item.isPaid ? "text-green-600" : "text-yellow-600"
-                  }`}
-                > <button className={`py-1 px-3 text-xs rounded-full mx-auto ${}`}>
-                  {item.isPaid ? "Paid" : "Pending"}</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+       
       </div>
-    </div>
+    
   );
 };
 
