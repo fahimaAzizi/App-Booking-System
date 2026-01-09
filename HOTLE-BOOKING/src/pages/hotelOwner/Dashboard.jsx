@@ -16,16 +16,16 @@ const Dashboard = () => {
       />
 
       {/* Stats Cards */}
-      <div className="flex gap-4 my-8 flex-wrap">
+      <div className="flex gap-4 my-8 ">
 
         {/* Total Bookings */}
-        <div className="bg-primary/5 border border-primary/10 rounded flex items-center gap-4 p-4 pr-8">
+        <div className="bg-primary/3 border border-primary/10 rounded flex items-center gap-4 p-4 pr-8">
           <img
             src={assets.totalBookingIcon}
             alt="Bookings"
             className="h-10 max-sm:hidden"
           />
-          <div>
+          <div className="flex flex-col sm:ml-4 font-medium">
             <p className="text-gray-500 text-sm">Total Bookings</p>
             <p className="text-xl font-semibold">
               {dashboardData.totalBookings}
@@ -93,8 +93,8 @@ const Dashboard = () => {
                   className={`py-3 px-4 font-medium ${
                     item.isPaid ? "text-green-600" : "text-yellow-600"
                   }`}
-                >
-                  {item.isPaid ? "Paid" : "Pending"}
+                > <button className={`py-1 px-3 text-xs rounded-full mx-auto ${}`}>
+                  {item.isPaid ? "Paid" : "Pending"}</button>
                 </td>
               </tr>
             ))}
