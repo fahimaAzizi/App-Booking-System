@@ -99,7 +99,7 @@ const Dashboard = () => {
                       : "text-yellow-600"
                   }`}
                 >
-                  {item.paymentStatus}
+                  {item.isPaid? 'completed': 'Pending+'}
                 </td>
               </tr>
             ))}
