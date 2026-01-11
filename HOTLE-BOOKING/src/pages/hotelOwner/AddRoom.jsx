@@ -29,7 +29,10 @@ const AddRoom = () => {
       <div>
         {Object.keys(images).map((key)=>
           <label htmlFor={`roomImage${key}`} key={key}>
-            <img src={images[key]? URL.createObjectURL(images[key]) : AuthenticatorAssertionResponse.uploadArea} alt="" />
+          
+            <img className="max-h-13 cursor-pointer opacity-80" src={images[key]? URL.createObjectURL(images[key]) : AuthenticatorAssertionResponse.uploadArea} alt="" />
+            <input type="file" accept="image/*" id={`roomImage${key}`} hidden 
+            onChange={e=> setImages({...images})}/>
           </label>
         )}
       </div>
