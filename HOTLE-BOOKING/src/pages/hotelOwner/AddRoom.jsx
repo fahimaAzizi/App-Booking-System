@@ -27,7 +27,11 @@ const AddRoom = () => {
       <Title align='left' font='outfit' Title ='Add Room' subTitle='Fill in the deteail crefully and accurate room details, pricing, and amenities, to enhance the user bookin experince.' />
       <p className="text-gray-800 mt-10"> Images</p>
       <div>
-        {Object.keys(images)}
+        {Object.keys(images).map((key)=>
+          <label htmlFor={`roomImage${key}`} key={key}>
+            <img src={images[key]? URL.createObjectURL(images[key]) : AuthenticatorAssertionResponse.uploadArea} alt="" />
+          </label>
+        )}
       </div>
     
     </form>
