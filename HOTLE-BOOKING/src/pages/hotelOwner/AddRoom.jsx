@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Title from "../../components/Title";
 
 const AddRoom = () => {
 
@@ -17,13 +18,14 @@ const AddRoom = () => {
       "Free Breakfast": false,
       "Room Service": false,
       "Mountain View": false,
+      'Pool Access' : false
     },
   });
 
   return (
-    <div>
-      Add Room
-    </div>
+    <form action="">
+      <Title/>
+    </form>
   );
 };
 
