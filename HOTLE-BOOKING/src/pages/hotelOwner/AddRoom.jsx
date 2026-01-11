@@ -24,7 +24,7 @@ const AddRoom = () => {
 
   return (
     <form action="">
-      <Title/>
+      <Title align='left' font='outfit' title ='Add Room' subTitle='Fill in the deteail crefully and accurate room details, pricing, and amenities, to enhance the user bookin experince.' />
     </form>
   );
 };
