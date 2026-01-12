@@ -38,7 +38,20 @@ const AddRoom = () => {
         )}
       </div>
       <div>
-          <p className="mt-4 text-gray-800">
+        <select
+  className="border border-gray-300 mt-1 rounded p-2 w-40"
+  value={inputs.roomType}
+  onChange={(e) =>
+    setInputs({ ...inputs, roomType: e.target.value })
+  }
+>
+  <option value="Luxury Room">Luxury Room</option>
+  <option value="Family Suite">Family Suite</option>
+</select>
+</div>
+
+<div>
+  <p className="mt-4 text-gray-800">
     Price <span className="text-xs">/night</span>
   </p>
   <input
@@ -50,6 +63,11 @@ const AddRoom = () => {
       setInputs({ ...inputs, pricePerNight: e.target.value })
     }
   />
+     </div>
+
+      </div>
+      <div>
+        <p>Ameniies</p>
       </div>
     </form>
   );
