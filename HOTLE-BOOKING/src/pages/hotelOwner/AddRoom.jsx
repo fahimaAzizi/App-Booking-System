@@ -3,7 +3,6 @@ import Title from "../../components/Title";
 import { assets } from "../../assets/assets";
 
 const AddRoom = () => {
-
   const [images, setImages] = useState({
     1: null,
     2: null,
@@ -59,37 +58,61 @@ const AddRoom = () => {
         ))}
       </div>
 
-      <div>
-        <select
-          className="border border-gray-300 mt-1 rounded p-2 w-40"
-          value={inputs.roomType}
-          onChange={(e) =>
-            setInputs({ ...inputs, roomType: e.target.value })
-          }
-        >
-          <option value="">Select Room Type</option>
-          <option value="Luxury Room">Luxury Room</option>
-          <option value="Family Suite">Family Suite</option>
-        </select>
+      {/* FIXED: missing div tag */}
+      <div className="w-full flex max-sm:flex-col sm:gap-4 mt-4">
+        <div className="flex-1 max-w-48">
+          <p className="text-gray-800 mt-4">Room Type</p>
+          <select
+            className="border border-gray-300 mt-1 rounded p-2 w-40"
+            value={inputs.roomType}
+            onChange={(e) =>
+              setInputs({ ...inputs, roomType: e.target.value })
+            }
+          >
+            <option value="">Select Room Type</option>
+            <option value="Luxury Room">Luxury Room</option>
+            <option value="Family Suite">Family Suite</option>
+          </select>
+        </div>
+
+        <div>
+          <p className="mt-4 text-gray-800">
+            Price <span className="text-xs">/night</span>
+          </p>
+          <input
+            type="number"
+            placeholder="0"
+            className="border border-gray-300 mt-1 rounded p-2 w-24"
+            value={inputs.pricePerNight}
+            onChange={(e) =>
+              setInputs({ ...inputs, pricePerNight: e.target.value })
+            }
+          />
+        </div>
       </div>
 
-      <div>
-        <p className="mt-4 text-gray-800">
-          Price <span className="text-xs">/night</span>
-        </p>
-        <input
-          type="number"
-          placeholder="0"
-          className="border border-gray-300 mt-1 rounded p-2 w-24"
-          value={inputs.pricePerNight}
-          onChange={(e) =>
-            setInputs({ ...inputs, pricePerNight: e.target.value })
-          }
-        />
-      </div>
+      <p className="text-gray-800 mt-6">Amenities</p>
 
-      <div className="mt-6">
-        <p className="text-gray-800">Amenities</p>
+      <div className="flex flex-col flex-wrap mt-1 text-gray-400 max-w-sm">
+        {Object.keys(inputs.amenities).map((amenity, index) => (
+          <div key={index} className="flex gap-2">
+            <input
+              type="checkbox"
+              id={`amenity${index}`}
+              checked={inputs.amenities[amenity]}
+              onChange={() =>
+                setInputs({
+                  ...inputs,
+                  amenities: {
+                    ...inputs.amenities,
+                    [amenity]: !inputs.amenities[amenity],
+                  },
+                })
+              }
+            />
+            <label htmlFor={`amenity${index}`}>{amenity}</label>
+          </div>
+        ))}
       </div>
     </form>
   );
