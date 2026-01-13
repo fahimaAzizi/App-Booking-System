@@ -36,6 +36,9 @@ const ListRoom = () => {
             {
               rooms.map(()=>(
                 <tr key={index}>
+                  <td>
+                    {ClipboardItem.roomType}
+                  </td>
 
                 </tr>
               ))
