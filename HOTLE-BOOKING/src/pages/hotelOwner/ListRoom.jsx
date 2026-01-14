@@ -50,8 +50,12 @@ const ListRoom = () => {
                   </td>
 
                     <td className="py-3 px-4 border-t border-gray-300 text-sm text-red-500
-                   ">
-                    {item.PricePerNight}
+                    text-center">
+                    <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap03">
+                      <input type="checbox" className="sr-oly peer" checked={item.isAvailable}
+                       />
+                       <div></div>
+                    </label>
                   </td>
 
 
