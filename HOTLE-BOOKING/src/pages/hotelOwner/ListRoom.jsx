@@ -36,9 +36,25 @@ const ListRoom = () => {
             {
               rooms.map(()=>(
                 <tr key={index}>
-                  <td>
+                  <td className="py-3 px-4 text-gray-700 border-t border-gray-300">
                     {ClipboardItem.roomType}
                   </td>
+                   <td className="py-3 px-4 text-gray-700 border-t border-gray-300
+                   max-sm:hidden">
+                    {item.amenities.join(', ')}
+                
+                  </td>
+                    <td className="py-3 px-4 text-gray-700 border-t border-gray-300
+                   ">
+                    {item.PricePerNight}
+                  </td>
+
+                    <td className="py-3 px-4 border-t border-gray-300 text-sm text-red-500
+                   ">
+                    {item.PricePerNight}
+                  </td>
+
+
 
                 </tr>
               ))
