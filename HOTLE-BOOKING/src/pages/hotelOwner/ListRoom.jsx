@@ -32,38 +32,35 @@ const ListRoom = () => {
               </th>
             </tr>
           </thead>
+
           <tbody className="text-sm">
-            {
-              rooms.map(()=>(
-                <tr key={index}>
-                  <td className="py-3 px-4 text-gray-700 border-t border-gray-300">
-                    {ClipboardItem.roomType}
-                  </td>
-                   <td className="py-3 px-4 text-gray-700 border-t border-gray-300
-                   max-sm:hidden">
-                    {item.amenities.join(', ')}
-                
-                  </td>
-                    <td className="py-3 px-4 text-gray-700 border-t border-gray-300
-                   ">
-                    {item.PricePerNight}
-                  </td>
+            {rooms.map((item, index) => (
+              <tr key={index}>
+                <td className="py-3 px-4 text-gray-700 border-t border-gray-300">
+                  {item.roomType}
+                </td>
 
-                    <td className="py-3 px-4 border-t border-gray-300 text-sm text-red-500
-                    text-center">
-                    <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap03">
-                      <input type="checbox" className="sr-oly peer" checked={item.isAvailable}
-                       />
-                       <div></div>
-                    </label>
-                  </td>
+                <td className="py-3 px-4 text-gray-700 border-t border-gray-300 max-sm:hidden">
+                  {Object.keys(item.amenities).join(", ")}
+                </td>
 
+                <td className="py-3 px-4 text-gray-700 border-t border-gray-300 text-center">
+                  ${item.pricePerNight}
+                </td>
 
-
-                </tr>
-              ))
-            }
-
+                <td className="py-3 px-4 border-t border-gray-300 text-center">
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer"
+                      checked={item.isAvailable}
+                      readOnly
+                    />
+                    <div className="w-10 h-5 bg-gray-300 rounded-full peer peer-checked:bg-primary after:content-[''] after:absolute after:left-1 after:top-1 after:bg-white after:h-3 after:w-3 after:rounded-full after:transition-all peer-checked:after:translate-x-5"></div>
+                  </label>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
