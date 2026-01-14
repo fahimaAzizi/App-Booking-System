@@ -16,7 +16,7 @@ const MyBookings = () => {
 
       {/* Page Title */}
       <Title
-        title="My Bookings"
+        Title="My Bookings"
         subTitle="Easily manage your past, current, and upcoming hotel reservations in one place. Plan your trips seamlessly with just a few clicks."
         align="left"
       />
