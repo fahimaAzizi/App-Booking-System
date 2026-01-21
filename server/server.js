@@ -4,6 +4,8 @@ import cors from"cors";
 import { connectDB } from 'mongoose';
 import {clerkMiddleware} from '@clerk/express'
 import clerkwebhooks from './controllers/clerkWebhooks';
+import userRouter from './routes/userRoutes';
+import hotelRouter from './routes/hotelRoutes';
 connectDB()
 
 const app = express()
@@ -18,6 +20,8 @@ app.use(clerkMiddleware())
 app.use("/api/clerk",clerkwebhooks)
 
 app.get('/',(req, res)=> res.send("API id working find"))
+app.use('./api/user',userRouter)
+app.use('./api/hotels',hotelRouter)
 
 const PORT = process.env.PORT || 3000;
 
