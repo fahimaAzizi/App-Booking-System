@@ -7,8 +7,28 @@ export  const create = async (req, res)=>{
 
         if(!hotel) return res.json({ success: false, message: "No Hotel Found"});
 
+
         
-    } catch (error) {
+    const uploadImages = req.files.map(async (file) => {
+      const response = await cloudinary.uploader.upload(file.path);
+      return response.secure_url;
+    });
+
+    // wait for all uploads
+    const images = await Promise.all(uploadImages);
+
+    await Room.create({
+      hotel: hotel._id,
+      roomType,
+      pricePerNight: +pricePerNight,
+      amenities: JSON.parse(amenities),
+      images,
+    });
+
+    res.json({ success: true, message: "Room created successfully" });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
         
-    }
-}
