@@ -39,5 +39,11 @@ export  const createRoom = async (req, res)=>{
 // API to get all rooms
 export const getRooms =async (req , res)=>{
 
+  try {
+    const hotelData = await Hotel({owner: req.auth.userId})
+    
+  } catch (error) {
+    
+  }
 }
         
