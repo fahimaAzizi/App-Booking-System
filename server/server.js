@@ -7,6 +7,7 @@ import clerkwebhooks from './controllers/clerkWebhooks';
 import userRouter from './routes/userRoutes';
 import hotelRouter from './routes/hotelRoutes';
 import connectCloudinary from './configs/cloudinary';
+import roomRouter from './routes/roomRoutes';
 
 
 connectDB();
@@ -26,6 +27,7 @@ app.use("/api/clerk",clerkwebhooks)
 app.get('/',(req, res)=> res.send("API id working find"))
 app.use('./api/user',userRouter)
 app.use('./api/hotels',hotelRouter)
+app.use('./api/room',roomRouter)
 
 const PORT = process.env.PORT || 3000;
 
