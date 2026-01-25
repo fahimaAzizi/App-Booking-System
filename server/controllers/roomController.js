@@ -41,9 +41,11 @@ export const getRooms =async (req , res)=>{
 
   try {
     const hotelData = await Hotel({owner: req.auth.userId})
-    
+    const room = await Room.find({hotel: hotelData._id.toString()})
+    ("hotel");
+    res.json({success: true, rooms})
   } catch (error) {
-    
+    res.json({success: false, message: error.message})
   }
 }
         
