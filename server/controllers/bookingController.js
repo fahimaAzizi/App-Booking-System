@@ -72,8 +72,10 @@ export const createBooking = async (req, res) => {
       totalPrice,
     })
 
+    res.json({success: true, message: "Booking created successfully"})
+
     // booking logic will be added here
   } catch (error) {
-    res.json({ success: false, message: error.message });
+    res.json({ success: false, message: "failed to created booking "});
   }
 };
