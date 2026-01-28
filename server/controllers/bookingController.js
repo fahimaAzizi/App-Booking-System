@@ -1,4 +1,5 @@
 import Booking from "../models/Booking.js"
+import Room from "../models/Room.js";
 
 // Function to Check Availability of Room
 const checkAvailability = async ({ checkInDate, checkOutDate, room }) => {
@@ -43,8 +44,20 @@ export const createBooking = async (req, res) => {
 
 
     const isAvailable = await checkAvailability({
-      
+      checkInDate,
+      checkOutDate,
+      room
     })
+    if(!isAvailable){
+      return res.json({success: false, message: "Room is not available" })
+    }
+    const roomData = await Room.findById(room).populate("hotel");
+    let totalPrice = roomData.pricePerNight;
+
+
+
+    const checkIn = new Date(checkInDate)
+    const checkOut = new Date(checkOutDate)
     // booking logic will be added here
   } catch (error) {
     res.json({ success: false, message: error.message });
