@@ -99,6 +99,43 @@ export const getUserBookings = async (req, res) => {
   }
 };
 
+// API to get all bookings for a hotel (Owner Dashboard)
 export const getHotelBookings = async (req, res) => {
-  const hotel = await
+  try {
+    const hotel = await Hotel.findOne({ owner: req.auth.userId });
+
+    if (!hotel) {
+      return res.json({
+        success: false,
+        message: "No Hotel found",
+      });
+    }
+
+    const bookings = await Booking.find({ hotel: hotel._id })
+      .populate("room hotel user")
+      .sort({ createdAt: -1 });
+
+    // Total Bookings
+    const totalBookings = bookings.length;
+
+    // Total Revenue
+    const totalRevenue = bookings.reduce(
+      (acc, booking) => acc + booking.totalPrice,
+      0
+    );
+
+    res.json({
+      success: true,
+      dashboardData: {
+        totalBookings,
+        totalRevenue,
+        bookings,
+      },
+    });
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
