@@ -99,6 +99,8 @@ export const getUserBookings = async (req, res) => {
   }
 };
 
+
+
 // API to get all bookings for a hotel (Owner Dashboard)
 export const getHotelBookings = async (req, res) => {
   try {
