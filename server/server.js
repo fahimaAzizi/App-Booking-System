@@ -8,6 +8,7 @@ import userRouter from './routes/userRoutes';
 import hotelRouter from './routes/hotelRoutes';
 import connectCloudinary from './configs/cloudinary';
 import roomRouter from './routes/roomRoutes';
+import bookingRouter from './routes/bookingRouter';
 
 
 connectDB();
@@ -28,6 +29,7 @@ app.get('/',(req, res)=> res.send("API id working find"))
 app.use('./api/user',userRouter)
 app.use('./api/hotels',hotelRouter)
 app.use('./api/room',roomRouter)
+app.use('./api/bookings',bookingRouter)
 
 const PORT = process.env.PORT || 3000;
 
