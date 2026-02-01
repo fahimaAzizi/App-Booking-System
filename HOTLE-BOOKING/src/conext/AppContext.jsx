@@ -2,6 +2,7 @@
 import { dashboardDummyData } from "../assets/assets";
 import {useNavigate} from "react-router-dom";
 import {useUser , useAuth} from "@clerk/clerk-react"
+import axios from "axios";
 
 const AppContext = createContext();
 
@@ -12,14 +13,15 @@ export const AppProvider = ({ children }) => {
   const {user} = useUser();
   const { getToken} = useAuth();
 
+  const [isOwner, setIsOwner] = useState(false)
+  const [showHotelReg, setShowHotelReg] = useState(false);
+
+  const
+
 
   const value = {
-    dashboardData,
-    setDashboardData,
-    user,
-    setUser,
-    loading,
-    setLoading,
+    currency, navigate, user, getToken,isOwner, setIsOwner ,axios,
+    showHotelReg, setShowHotelReg,
   };
 
   return (
