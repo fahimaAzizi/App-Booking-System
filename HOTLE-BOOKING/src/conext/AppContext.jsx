@@ -1,19 +1,17 @@
   import { createContext, useContext, useState } from "react";
 import { dashboardDummyData } from "../assets/assets";
-import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom";
+import {useUser , useAuth} from "@clerk/clerk-react"
 
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
 
   const currency = import.meta.env.VITE_CURRNCY || "$";
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const {user} = useUser();
+  const { getToken} = useAuth();
 
-
-  
-  const [dashboardData, setDashboardData] = useState(dashboardDummyData);
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   const value = {
     dashboardData,
