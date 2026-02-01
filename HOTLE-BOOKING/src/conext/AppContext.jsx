@@ -1,10 +1,16 @@
   import { createContext, useContext, useState } from "react";
 import { dashboardDummyData } from "../assets/assets";
+import {useNavigate} from "react-router-dom"
 
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  // Global states
+
+  const currency = import.meta.env.VITE_CURRNCY || "$";
+  const navigate = useNavigate()
+
+
+  
   const [dashboardData, setDashboardData] = useState(dashboardDummyData);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -26,6 +32,6 @@ export const AppProvider = ({ children }) => {
 };
 
 // Custom hook
-export const useAppContext = () => {
-  return useContext(AppContext);
-};
+export const useAppContext = () =>
+ useContext(AppContext);
+
