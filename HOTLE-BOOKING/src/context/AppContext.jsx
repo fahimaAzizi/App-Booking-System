@@ -15,6 +15,7 @@ export const AppProvider = ({ children }) => {
 
   const [isOwner, setIsOwner] = useState(false)
   const [showHotelReg, setShowHotelReg] = useState(false);
+
   const [searchedCities , setSearchedCities] = useState([])
 
   const fetchUser = async ()=>{
@@ -34,13 +35,15 @@ export const AppProvider = ({ children }) => {
   }
 
   useEffect(()=>{
-    
-  })
+    if(user){
+      fetchUser()
+    }
+  },[user])
 
 
   const value = {
     currency, navigate, user, getToken,isOwner, setIsOwner ,axios,
-    showHotelReg, setShowHotelReg,
+    showHotelReg, setShowHotelReg,searchedCities, setSearchedCities
   };
 
   return (
