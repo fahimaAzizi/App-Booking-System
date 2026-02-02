@@ -1,8 +1,8 @@
-  import { createContext, useContext, useState } from "react";
-import { dashboardDummyData } from "../assets/assets";
-import {useNavigate} from "react-router-dom";
+import { createContext, useContext, useEffect, useState } from "react";
+import {data, useNavigate} from "react-router-dom";
 import {useUser , useAuth} from "@clerk/clerk-react"
 import axios from "axios";
+import {toast} from "react-hot-toast"
 
 const AppContext = createContext();
 
@@ -15,8 +15,27 @@ export const AppProvider = ({ children }) => {
 
   const [isOwner, setIsOwner] = useState(false)
   const [showHotelReg, setShowHotelReg] = useState(false);
+  const [searchedCities , setSearchedCities] = useState([])
 
-  const
+  const fetchUser = async ()=>{
+    try {
+      await axios.get(' /api/user', {headers:{Authorization:`Bearer ${await getToken()}`}})
+      if(data.success){
+        setIsOwner(data.role === "hotelOwner");
+        setSearchedCities(data.recentSearchedCities)
+      } else{
+        setTimeout(()=>{
+          fetchUser()
+        },5000)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
+  useEffect(()=>{
+    
+  })
 
 
   const value = {
