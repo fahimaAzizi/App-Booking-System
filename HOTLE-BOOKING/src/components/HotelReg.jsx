@@ -18,6 +18,7 @@ const HotelReg = () => {
 
         <div className="relative flex flex-col items-center md:w-1/2 p-8 md:p-10">
           
+          {/* CLOSE ICON */}
           <img
             src={assets.closeIcon}
             alt="close"
@@ -29,6 +30,7 @@ const HotelReg = () => {
             Register Your Hotel
           </p>
 
+          {/* HOTEL NAME */}
           <div className="w-full mt-4">
             <label className="font-medium text-gray-500">Hotel Name</label>
             <input
@@ -38,6 +40,7 @@ const HotelReg = () => {
             />
           </div>
 
+          {/* ADDRESS */}
           <div className="w-full mt-4">
             <label className="font-medium text-gray-500">Address</label>
             <input
@@ -47,6 +50,7 @@ const HotelReg = () => {
             />
           </div>
 
+          {/* CITY */}
           <div className="w-full mt-4">
             <label className="font-medium text-gray-500">City</label>
             <select
