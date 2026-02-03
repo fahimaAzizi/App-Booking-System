@@ -15,13 +15,13 @@ import { Toaster } from 'react-hot-toast'
 import { useAppContext } from './context/AppContext.jsx'
 
 const App = () => {
-  const location = useLocation()
-  const isOwnerPath = location.pathname.startsWith("/owner")
-  const { showHotelReg } = useAppContext()
+ 
+  const isOwnerPath = location.pathname.includes("owner")
+  const { showHotelReg } = useAppContext();
 
   return (
     <div>
-      <Toaster/>
+   
       {!isOwnerPath && <Navbar />}
       {showHotelReg && <HotelReg />}
 
