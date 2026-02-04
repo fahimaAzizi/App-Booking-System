@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { assets, cities } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
@@ -6,9 +6,14 @@ import toast from "react-hot-toast";
 const HotelReg = () => {
   const { setShowHotelReg } = useAppContext();
 
+  const [name ,setName] = useState("")
+  const [address , setAddress] = useState("")
+  const [contact, setContact]  = useState("")
+  const [city ,setCity]  = useState("")
+
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70">
-      <form className="flex bg-white rounded-xl max-w-4xl max-md:mx-2">
+      <form onSubmit={onSumitHandler} className="flex bg-white rounded-xl max-w-4xl max-md:mx-2">
         
         <img
           src={assets.regImage}
@@ -33,17 +38,27 @@ const HotelReg = () => {
           {/* HOTEL NAME */}
           <div className="w-full mt-4">
             <label className="font-medium text-gray-500">Hotel Name</label>
-            <input
+            <input id="name"
+            onChange={(e)=> setName(e.target.value)} value={name}
               type="text"
               className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500"
               required
             />
           </div>
+          <div>
+            <label htmlFor="contact" className="font-medium text-gray-500">
+              Phone
+            </label>
+            <input onChange={(e)=> setContact(e.target.value)} value={contact}
+              type="text"
+              className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500"
+              required/>
+          </div>
 
           {/* ADDRESS */}
           <div className="w-full mt-4">
             <label className="font-medium text-gray-500">Address</label>
-            <input
+            <input onChange={(e)=>  setAddress(e.target.value)} value={address}
               type="text"
               className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500"
               required
