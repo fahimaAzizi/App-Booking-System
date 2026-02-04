@@ -1,5 +1,5 @@
 import React from 'react'
-import Navbar from './components/hotelOwner/Navbar.jsx'
+import Navbar from './components/Navbar.jsx'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Home from './pages/Home'
 import Footer from './components/Footer'
@@ -11,8 +11,8 @@ import Layout from './pages/hotelOwner/Layout'
 import Dashboard from './pages/hotelOwner/Dashboard'
 import AddRoom from './pages/hotelOwner/AddRoom'
 import ListRoom from './pages/hotelOwner/ListRoom'
-import { Toaster } from 'react-hot-toast'
-import { useAppContext } from './context/AppContext.jsx'
+import { useAppContext } from "../context/AppContext";
+
 
 const App = () => {
   const location = useLocation()
