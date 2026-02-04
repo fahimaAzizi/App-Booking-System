@@ -21,7 +21,7 @@ const App = () => {
 
   return (
     <div>
-      <Toaster position="top-right" />
+     
 
       {!isOwnerPath && <Navbar />}
       {showHotelReg && <HotelReg />}
