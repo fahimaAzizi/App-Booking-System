@@ -7,7 +7,7 @@ import { toast } from "react-hot-toast";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const currency = import.meta.env.VITE_CURRNCY || "$";
+  const currency = import.meta.env.VITE_CURRENCY || "$";
   const navigate = useNavigate();
   const { user } = useUser();
   const { getToken } = useAuth();

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useClerk, UserButton } from "@clerk/clerk-react";
-import { useAppContext } from "./context/AppContext";
+import { useAppContext } from "../conext/AppContext";
 
 const BookIcon = () => (
   <svg
@@ -91,16 +91,14 @@ const Navbar = () => {
         ))}
 
         {user && (
-        
-        <button
-          className={`border px-4 py-1 text-sm font-light rounded-full transition-all duration-300 
-            ${isScrolled ? "text-black border-black" : "text-white border-white"}`
-          } onClick ={()=> isOwner ? navigate('/owner') : setShowHotelReg(true)}
-        >{isOwner ? 'Dashboard' : 'List Your Hotel'}
-          { isOwner ? 'Dashboard' : 'List Your Hotel'}
-        </button>
-        )
-        }
+          <button
+            className={`border px-4 py-1 text-sm font-light rounded-full transition-all duration-300 
+              ${isScrolled ? "text-black border-black" : "text-white border-white"}`}
+            onClick={() => isOwner ? navigate('/owner') : setShowHotelReg(true)}
+          >
+            {isOwner ? 'Dashboard' : 'List Your Hotel'}
+          </button>
+        )}
       </div>
 
       {/* Desktop Right Icons */}
@@ -127,7 +125,7 @@ const Navbar = () => {
         </button>)
       }
 
-       
+        
       </div>
 
       {/* Mobile Menu Button */}
@@ -170,9 +168,7 @@ const Navbar = () => {
           </Link>
         ))}
 
-       { user && <button className="border border-black px-4 py-1 rounded-full"
-       onClick ={()=> isOwner? navigate('/owner') : setShowHotelReg(true)}>
-        {isOwner ? 'Dashboard' : 'List your hotel'}</button>}
+       
 
        {!user && <button onClick={openSignIn} className="bg-black text-white px-8 py-2.5 rounded-full">
           Login

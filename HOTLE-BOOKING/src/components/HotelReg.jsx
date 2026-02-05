@@ -1,19 +1,28 @@
 import React, { useState } from "react";
 import { assets, cities } from "../assets/assets";
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../conext/AppContext";
+import { toast } from "react-hot-toast";
 
 
 const HotelReg = () => {
-  const { setShowHotelReg } = useAppContext();
+  const { setShowHotelReg, setIsOwner } = useAppContext();
 
   const [name ,setName] = useState("")
   const [address , setAddress] = useState("")
   const [contact, setContact]  = useState("")
   const [city ,setCity]  = useState("")
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Simulate registration success
+    setIsOwner(true);
+    toast.success("Hotel registered successfully!");
+    setShowHotelReg(false);
+  }
+
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70">
-      <form onSubmit={onSumitHandler} className="flex bg-white rounded-xl max-w-4xl max-md:mx-2">
+      <form onSubmit={handleSubmit} className="flex bg-white rounded-xl max-w-4xl max-md:mx-2">
         
         <img
           src={assets.regImage}
@@ -69,6 +78,8 @@ const HotelReg = () => {
           <div className="w-full mt-4">
             <label className="font-medium text-gray-500">City</label>
             <select
+              onChange={(e) => setCity(e.target.value)}
+              value={city}
               className="border border-gray-200 rounded w-full px-3 py-2.5 mt-1 outline-indigo-500"
               required
             >

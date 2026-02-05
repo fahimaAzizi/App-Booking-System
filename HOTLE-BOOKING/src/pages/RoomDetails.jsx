@@ -10,7 +10,7 @@ const RoomDetails = () => {
 
   useEffect(() => {
     const selectedRoom = roomsDummyData.find(
-      (room) => room._id == id
+      (room) => room._id === id
     );
 
     if (selectedRoom) {
@@ -148,13 +148,13 @@ const RoomDetails = () => {
         </button>
       </form>
       <div>
-        {roomCommonData.map(()=>(
+        {roomCommonData.map((data, index) => (
           <div key={index} className="flex items-start gap-2">
-            <img src={speechSynthesis.icon} alt="" />
+            <img src={data.icon} alt="" />
           </div>
         ))}
       </div>
-      <div className="max-w-3xl border-y border-gray-300 my-15 py-10 text-gray-500">
+      <div className="max-w-3xl border-y border-gray-300 my-10 py-10 text-gray-500">
         Guests will be allocated on the ground floor according
          to availability. You get a comfortable two-bedroom a
          partment that has a true city feeling. The price quoted is for two guests; at the guest slot, please mark the number of guests to get the exact price for groups. Guests will be 
