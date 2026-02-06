@@ -33,12 +33,29 @@ const AddRoom = () => {
         toast.error("Pleas fill in all the details")
         return;
       }
-      setLoading(true);
-      try {
-        
-      } catch (error) {
-        
-      }
+     setLoading(true);
+
+try {
+  const formData = new FormData();
+
+  formData.append("roomType", inputs.roomType);
+  formData.append("pricePerNight", inputs.roompricePerNightType);
+
+  // Convert amenities object → array of enabled amenities
+  const amenities = Object.keys(inputs.amenities).filter(
+    (key) => inputs.amenities[key]
+  );
+  formData.append("amenities", JSON.stringify(amenities));
+
+  // Add images to FormData
+  Object.keys(images).forEach((key) => {
+    if (images[key]) {
+      formData.append("images", images[key]);
+    }
+  });
+
+
+
     }
   return (
     <form onSubmit={onSubmitHandler}>
