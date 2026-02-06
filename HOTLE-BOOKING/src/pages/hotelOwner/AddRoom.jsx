@@ -59,7 +59,16 @@ try {
   if (data.success){
     toast.success(data.message)
     setInputs({
-      
+      roomType: '',
+      pricePerNight: 0 ,
+      amenities: {
+        'Free WiFi': false,
+        'Free Breakfast': false,
+        'Room Service': false,
+        'Mountain View': false,
+        'Pool Access': false,
+      }
+
     })
   }
 
