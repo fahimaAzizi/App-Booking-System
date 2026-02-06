@@ -54,7 +54,12 @@ try {
     }
   });
 
-
+  // 👉 now send formData using axios / fetch
+} catch (error) {
+  console.error(error);
+} finally {
+  setLoading(false);
+}
 
     }
   return (
