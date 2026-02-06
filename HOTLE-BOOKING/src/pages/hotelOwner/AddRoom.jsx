@@ -54,7 +54,15 @@ try {
     }
   });
 
-  const { data } = await axios.post()
+  const { data } = await axios.post('/api/room', formData , {headers : {Authorization : `Bearer ${await getToken}`}})
+
+  if (data.success){
+    toast.success(data.message)
+    setInputs({
+      
+    })
+  }
+
 } catch (error) {
   console.error(error);
 } finally {
