@@ -54,7 +54,7 @@ try {
     }
   });
 
-  // 👉 now send formData using axios / fetch
+  const { data } = await axios.post()
 } catch (error) {
   console.error(error);
 } finally {
