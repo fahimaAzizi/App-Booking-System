@@ -70,6 +70,9 @@ try {
       }
 
     })
+    const [loading ,setLoading] = useState(false)
+
+
     setImages({1: null, 2: null,3: null, 4: null})
   }
   else{
@@ -175,6 +178,9 @@ try {
           </div>
         ))}
       </div>
+      <button className="bg-primary text-white px-8 py-2 rounded mt-8 cursor-pointer" dishabled={loading}>
+        {loading ? 'Adding...' : "Add room"}
+      </button>
     </form>
   );
 };
