@@ -18,7 +18,11 @@ const fetchRooms = async () => {
       }
     );
 
-  
+    if (data.success) {
+      setRooms(data.rooms);
+    } else {
+      toast.error(data.message);
+    }
   } catch (error) {
     toast.error(error.message);
   }
