@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useActionState, useState } from "react";
 import Title from "../../components/Title";
 import { roomsDummyData } from "../../assets/assets";
 
 const ListRoom = () => {
   const [rooms, setRooms] = useState(roomsDummyData);
+  const {axios , getToken , user} = useActionState();
+
+  const fetchRooms = async ()=>{
+    try {
+      
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <div>
