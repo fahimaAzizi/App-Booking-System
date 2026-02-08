@@ -1,4 +1,4 @@
-import React, { useActionState, useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import Title from "../../components/Title";
 import { roomsDummyData } from "../../assets/assets";
 
@@ -27,6 +27,11 @@ const fetchRooms = async () => {
     toast.error(error.message);
   }
 };
+useEffect(()=>{
+  if(user){
+    fetchRooms()
+  }
+},[user])
 
 
   return (
