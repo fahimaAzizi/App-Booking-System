@@ -6,13 +6,24 @@ const ListRoom = () => {
   const [rooms, setRooms] = useState(roomsDummyData);
   const {axios , getToken , user} = useActionState();
 
-  const fetchRooms = async ()=>{
-    try {
-      
-    } catch (error) {
-      
-    }
+  // fetch rooms of the hotel owner
+const fetchRooms = async () => {
+  try {
+    const { data } = await axios.get(
+      "/api/rooms/owner",
+      {
+        headers: {
+          Authorization: `Bearer ${await getToken()}`
+        }
+      }
+    );
+
+  
+  } catch (error) {
+    toast.error(error.message);
   }
+};
+
 
   return (
     <div>
