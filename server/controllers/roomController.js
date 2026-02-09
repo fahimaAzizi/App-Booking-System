@@ -5,18 +5,6 @@ import Hotel from "../models/Hotel.js";
 import Room from "../models/Room.js";
 
 // ===============================
-// GET ALL ROOMS (Public)
-// ===============================
-export const getRooms = async (req, res) => {
-  try {
-    const rooms = await Room.find({ isAvailable: true }).populate('hotel', 'name location');
-    res.json({ success: true, rooms });
-  } catch (error) {
-    res.json({ success: false, message: error.message });
-  }
-};
-
-// ===============================
 // CREATE A NEW ROOM
 // ===============================
 export const createRoom = async (req, res) => {

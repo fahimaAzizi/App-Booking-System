@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useActionState, useEffect, useState } from "react";
 import Title from "../../components/Title";
 import { roomsDummyData } from "../../assets/assets";
 import toast from "react-hot-toast";
-import { useAppContext } from "../../conext/AppContext";
 
 const ListRoom = () => {
   const [rooms, setRooms] = useState(roomsDummyData);
   const [loading, setLoading] = useState(false);
-  const {axios , getToken , user} = useAppContext();
+  const {axios , getToken , user} = useActionState();
 
   // fetch rooms of the hotel owner
  const fetchRooms = async () => {
    setLoading(true);
    try {
      const { data } = await axios.get(
-       "/api/room/owner",
+       "/api/rooms/owner",
        {
          headers: {
            Authorization: `Bearer ${await getToken()}`
@@ -36,20 +35,15 @@ const ListRoom = () => {
 
  const ToggleAvailibilty = async (roomId)=>{
    setLoading(true);
-   try {
-     const {data} = await axios.post('/api/room/toggle-availability', {roomId},
-       {headers : {Authorization : `Bearer ${await getToken()}`}}
-     ) 
-     if (data.success) {
-      toast.success(data.message)
-      fetchRooms()
-     }else{
-      toast.error(data.message)
-     }
-   } catch (error) {
-     toast.error(error.message)
-   } finally {
-     setLoading(false);
+   const {data} = await axios.post('./post/rooms/toggle-availability', {roomId},
+     {headers : {Authorization : `Bearer ${await getToken()}`}}
+   ) 
+   if (data.success) {
+    toast.success(data.message)
+    fetchRooms()
+   }else{
+    toast.error(data.message)
+    setLoading(false);
    }
  }
  useEffect(()=>{
@@ -105,7 +99,7 @@ const ListRoom = () => {
                   </td>
 
                   <td className="py-3 px-4 text-gray-700 border-t border-gray-300 max-sm:hidden">
-                    {Array.isArray(item.amenities) ? item.amenities.join(", ") : Object.keys(item.amenities).join(", ")}
+                    {Object.keys(item.amenities).join(", ")}
                   </td>
 
                   <td className="py-3 px-4 text-gray-700 border-t border-gray-300 text-center">

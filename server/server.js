@@ -25,16 +25,11 @@ app.use(clerkMiddleware())
 
 app.use("/api/clerk",clerkwebhooks)
 
-app.get('/',(req, res)=> res.send("API is working"))
-
-// Test route
-app.get('/api/test', (req, res) => {
-  res.json({ success: true, message: "Backend is working!" })
-})
-app.use('/api/user',userRouter)
-app.use('/api/hotels',hotelRouter)
-app.use('/api/room',roomRouter)
-app.use('/api/bookings',bookingRouter)
+app.get('/',(req, res)=> res.send("API id working find"))
+app.use('./api/user',userRouter)
+app.use('./api/hotels',hotelRouter)
+app.use('./api/room',roomRouter)
+app.use('./api/bookings',bookingRouter)
 
 const PORT = process.env.PORT || 3000;
 

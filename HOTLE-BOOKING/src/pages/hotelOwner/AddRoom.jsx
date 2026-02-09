@@ -28,62 +28,61 @@ const AddRoom = () => {
   
     const [loading, setLoading] = useState(false)
     const onSubmitHandler = async (e)=>{
-      e.preventDefault()
-      if(!inputs.roomType || !inputs.pricePerNight || !inputs.amenities || !Object.values(images).some(image => image)){
+      e.preventDetfault()
+      if(inputs.roomType || !inputs.pricePerNight || inputs.amenities || !Object.values(images).some(image => image)){
         toast.error("Pleas fill in all the details")
         return;
       }
      setLoading(true);
 
-try {
-  const formData = new FormData();
+ try {
+   const formData = new FormData();
 
-  formData.append("roomType", inputs.roomType);
-  formData.append("pricePerNight", inputs.pricePerNight);
+   formData.append("roomType", inputs.roomType);
+   formData.append("pricePerNight", inputs.roompricePerNightType);
 
-  // Convert amenities object → array of enabled amenities
-  const amenities = Object.keys(inputs.amenities).filter(
-    (key) => inputs.amenities[key]
-  );
-  formData.append("amenities", JSON.stringify(amenities));
+   // Convert amenities object → array of enabled amenities
+   const amenities = Object.keys(inputs.amenities).filter(
+     (key) => inputs.amenities[key]
+   );
+   formData.append("amenities", JSON.stringify(amenities));
 
-  // Add images to FormData
-  Object.keys(images).forEach((key) => {
-    if (images[key]) {
-      formData.append("images", images[key]);
-    }
-  });
+   // Add images to FormData
+   Object.keys(images).forEach((key) => {
+     if (images[key]) {
+       formData.append("images", images[key]);
+     }
+   });
 
-  const { data } = await axios.post('/api/room', formData , {headers : {Authorization : `Bearer ${await getToken()}`}})
+   const { data } = await axios.post('/api/room', formData , {headers : {Authorization : `Bearer ${await getToken}`}})
 
-  if (data.success){
-    toast.success(data.message)
-    setInputs({
-      roomType: '',
-      pricePerNight: 0 ,
-      amenities: {
-        'Free WiFi': false,
-        'Free Breakfast': false,
-        'Room Service': false,
-        'Mountain View': false,
-        'Pool Access': false,
-      }
+   if (data.success){
+     toast.success(data.message)
+     setInputs({
+       roomType: '',
+       pricePerNight: 0 ,
+       amenities: {
+         'Free WiFi': false,
+         'Free Breakfast': false,
+         'Room Service': false,
+         'Mountain View': false,
+         'Pool Access': false,
+       }
 
-    })
-   
+     })
+    
 
+     setImages({1: null, 2: null,3: null, 4: null})
+   }
+   else{
+     toast.error(data.message) 
+   }
 
-    setImages({1: null, 2: null,3: null, 4: null})
-  }
-  else{
-    toast.error(data.message) 
-  }
-
-} catch (error) {
-  console.error(error);
-} finally {
-  setLoading(false);
-}
+ } catch (error) {
+   console.error(error);
+ } finally {
+   setLoading(false);
+ }
 
     }
   return (
@@ -178,7 +177,7 @@ try {
           </div>
         ))}
       </div>
-      <button className="bg-primary text-white px-8 py-2 rounded mt-8 cursor-pointer" disabled={loading}>
+      <button className="bg-primary text-white px-8 py-2 rounded mt-8 cursor-pointer" dishabled={loading}>
         {loading ? 'Adding...' : "Add room"}
       </button>
     </form>
