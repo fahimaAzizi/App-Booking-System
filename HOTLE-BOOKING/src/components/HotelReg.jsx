@@ -5,19 +5,40 @@ import { toast } from "react-hot-toast";
 
 
 const HotelReg = () => {
-  const { setShowHotelReg, setIsOwner } = useAppContext();
+  const { axios, getToken, setShowHotelReg, setIsOwner } = useAppContext();
 
   const [name ,setName] = useState("")
   const [address , setAddress] = useState("")
   const [contact, setContact]  = useState("")
   const [city ,setCity]  = useState("")
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate registration success
-    setIsOwner(true);
-    toast.success("Hotel registered successfully!");
-    setShowHotelReg(false);
+    setLoading(true)
+    
+    try {
+      const { data } = await axios.post('/api/hotel', {
+        name,
+        address,
+        contact,
+        city
+      }, {
+        headers: { Authorization: `Bearer ${await getToken()}` }
+      })
+      
+      if (data.success) {
+        setIsOwner(true);
+        toast.success(data.message);
+        setShowHotelReg(false);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Registration failed");
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -95,8 +116,9 @@ const HotelReg = () => {
           <button
             type="submit"
             className="w-full bg-primary text-white py-2 mt-6 rounded-md hover:bg-primary-dull transition-all active:scale-95"
+            disabled={loading}
           >
-            Register Hotel
+            {loading ? "Registering..." : "Register Hotel"}
           </button>
         </div>
       </form>
