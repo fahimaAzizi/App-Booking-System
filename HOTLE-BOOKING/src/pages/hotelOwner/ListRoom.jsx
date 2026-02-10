@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Title from "../../components/Title";
-import { roomsDummyData } from "../../assets/assets";
+import { assets } from "../../assets/assets";
 import toast from "react-hot-toast";
 import { useAppContext } from "../../conext/AppContext";
 
 const ListRoom = () => {
-  const [rooms, setRooms] = useState(roomsDummyData);
+  const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(false);
   const {axios , getToken , user} = useAppContext();
 

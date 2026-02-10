@@ -1,9 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "../../components/Title";
-import { assets, dashboardDummyData } from "../../assets/assets";
+import { assets } from "../../assets/assets";
+import { useAppContext } from "../../conext/AppContext";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
-  const [dashboardData] = useState(dashboardDummyData);
+  const [dashboardData, setDashboardData] = useState({
+    totalBookings: 0,
+    totalRevenue: 0,
+    bookings: []
+  });
+  const [loading, setLoading] = useState(true);
+  const {axios , getToken} = useAppContext();
+
+  const fetchDashboardData = async () => {
+    try {
+      const { data } = await axios.get('/api/bookings/hotel', {
+        headers: { Authorization: `Bearer ${await getToken()}` }
+      });
+
+      if (data.success) {
+        setDashboardData({
+          totalBookings: data.dashboardData.totalBookings,
+          totalRevenue: data.dashboardData.totalRevenue,
+          bookings: data.dashboardData.bookings
+        });
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
 
   return (
     <div className="p-6">
@@ -62,26 +96,43 @@ const Dashboard = () => {
           </thead>
 
           <tbody className="text-sm">
-            {dashboardData.bookings.map((item, index) => (
-              <tr key={index} className="border-t">
-                <td className="py-3 px-4">{item.user.username}</td>
-                <td className="py-3 px-4 max-sm:hidden">
-                  {item.room.roomType}
-                </td>
-                <td className="py-3 px-4">${item.totalPrice}</td>
-                <td className="py-3 px-4 font-medium">
-                  <button
-                    className={`py-1 px-3 text-xs rounded-full ${
-                      item.isPaid
-                        ? "bg-green-200 text-green-600"
-                        : "bg-amber-200 text-yellow-600"
-                    }`}
-                  >
-                    {item.isPaid ? "Completed" : "Pending"}
-                  </button>
+            {loading ? (
+              <tr>
+                <td colSpan="4" className="py-8 text-center">
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin"></div>
+                    <span className="text-gray-500">Loading...</span>
+                  </div>
                 </td>
               </tr>
-            ))}
+            ) : dashboardData.bookings.length === 0 ? (
+              <tr>
+                <td colSpan="4" className="py-8 text-center text-gray-500">
+                  No bookings yet
+                </td>
+              </tr>
+            ) : (
+              dashboardData.bookings.map((item, index) => (
+                <tr key={index} className="border-t">
+                  <td className="py-3 px-4">{item.user ? item.user.username : 'Guest'}</td>
+                  <td className="py-3 px-4 max-sm:hidden">
+                    {item.room ? item.room.roomType : 'Room'}
+                  </td>
+                  <td className="py-3 px-4">${item.totalPrice}</td>
+                  <td className="py-3 px-4 font-medium">
+                    <button
+                      className={`py-1 px-3 text-xs rounded-full ${
+                        item.isPaid
+                          ? "bg-green-200 text-green-600"
+                          : "bg-amber-200 text-yellow-600"
+                      }`}
+                    >
+                      {item.isPaid ? "Completed" : "Pending"}
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

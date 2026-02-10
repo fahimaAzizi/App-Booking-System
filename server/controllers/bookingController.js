@@ -37,12 +37,10 @@ export const checkRoomAvailabilityAPI = async (req, res) => {
 };
 
 // API to create a new booking
-// POST /api/bookings/book
 export const createBooking = async (req, res) => {
   try {
     const {room , checkInDate , checkOutDate, guests} = req.body;
-    const user = req.user._id;
-
+    const user = req.auth.userId;
 
     const isAvailable = await checkAvailability({
       checkInDate,
@@ -55,14 +53,12 @@ export const createBooking = async (req, res) => {
     const roomData = await Room.findById(room).populate("hotel");
     let totalPrice = roomData.pricePerNight;
 
-
-
     const checkIn = new Date(checkInDate)
     const checkOut = new Date(checkOutDate)
     const timeDiff = checkOut.getTime() -checkIn.getTime();
     const nights = Math.ceil(timeDiff / (1000*3600 *24));
 
-    totalPrice *+nights;
+    totalPrice *= nights;
     const booking = await Booking.create({
       user,
       room,
@@ -75,17 +71,15 @@ export const createBooking = async (req, res) => {
 
     res.json({success: true, message: "Booking created successfully"})
 
-    // booking logic will be added here
   } catch (error) {
     res.json({ success: false, message: "failed to created booking "});
   }
 };
 
 // API to get all bookings for a user
-// GET /api/bookings/user
 export const getUserBookings = async (req, res) => {
   try {
-    const user = req.user.id;
+    const user = req.auth.userId;
 
     const bookings = await Booking.find({ user })
       .populate("room hotel")
@@ -99,7 +93,6 @@ export const getUserBookings = async (req, res) => {
     });
   }
 };
-
 
 
 // API to get all bookings for a hotel (Owner Dashboard)
