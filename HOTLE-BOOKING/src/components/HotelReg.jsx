@@ -16,7 +16,7 @@ const HotelReg = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true)
-    
+
     try {
       const { data } = await axios.post('/api/hotel', {
         name,
@@ -26,7 +26,7 @@ const HotelReg = () => {
       }, {
         headers: { Authorization: `Bearer ${await getToken()}` }
       })
-      
+
       if (data.success) {
         setIsOwner(true);
         toast.success(data.message);

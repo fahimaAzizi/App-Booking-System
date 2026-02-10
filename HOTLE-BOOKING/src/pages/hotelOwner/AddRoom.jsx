@@ -25,7 +25,7 @@ const AddRoom = () => {
       "Pool Access": false,
     },
   });
-  
+   
     const [loading, setLoading] = useState(false)
     const onSubmitHandler = async (e)=>{
       e.preventDefault()
@@ -69,7 +69,7 @@ const AddRoom = () => {
          'Pool Access': false,
        }
 
-     })
+     )
     
 
      setImages({1: null, 2: null,3: null, 4: null})
