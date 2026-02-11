@@ -11,7 +11,7 @@ export const createRoom = async (req, res) => {
   try {
     const { roomType, pricePerNight, amenities } = req.body;
 
-    const hotel = await Hotel.findOne({ owner: req.auth.userId });
+    const hotel = await Hotel.findOne({ owner: req.user._id });
     if (!hotel) {
       return res.json({ success: false, message: "No Hotel Found" });
     }
@@ -26,6 +26,7 @@ export const createRoom = async (req, res) => {
 
     await Room.create({
       hotel: hotel._id,
+      owner: req.user._id,
       roomType,
       pricePerNight: Number(pricePerNight),
       amenities: JSON.parse(amenities),
@@ -43,7 +44,7 @@ export const createRoom = async (req, res) => {
 // ===============================
 export const getOwnerRooms = async (req, res) => {
   try {
-    const hotelData = await Hotel.findOne({ owner: req.auth.userId });
+    const hotelData = await Hotel.findOne({ owner: req.user._id });
     if (!hotelData) {
       return res.json({ success: false, message: "No Hotel Found" });
     }
@@ -51,6 +52,33 @@ export const getOwnerRooms = async (req, res) => {
     const rooms = await Room.find({ hotel: hotelData._id });
 
     res.json({ success: true, rooms });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// ===============================
+// GET ALL ROOMS (Public)
+// ===============================
+export const getRooms = async (req, res) => {
+  try {
+    const rooms = await Room.find({ isAvailable: true }).populate('hotel', 'name address city');
+    res.json({ success: true, rooms });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+// ===============================
+// GET SINGLE ROOM BY ID
+// ===============================
+export const getRoomById = async (req, res) => {
+  try {
+    const room = await Room.findById(req.params.id).populate('hotel', 'name address city owner');
+    if (!room) {
+      return res.json({ success: false, message: "Room not found" });
+    }
+    res.json({ success: true, room });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }

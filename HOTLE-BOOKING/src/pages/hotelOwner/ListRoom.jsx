@@ -37,7 +37,7 @@ const ListRoom = () => {
  const ToggleAvailibilty = async (roomId)=>{
    setLoading(true);
    try {
-     const {data} = await axios.post('/api/room/toggle-availability', {roomId},
+     const {data} = await axios.post('/api/room/toggleRoomAvailability', {roomId},
        {headers : {Authorization : `Bearer ${await getToken()}`}}
      ) 
      if (data.success) {

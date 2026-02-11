@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { assets, cities } from "../assets/assets";
 import { useAppContext } from "../conext/AppContext";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 const HotelReg = () => {
   const { axios, getToken, setShowHotelReg, setIsOwner } = useAppContext();
+  const navigate = useNavigate();
 
   const [name ,setName] = useState("")
   const [address , setAddress] = useState("")
@@ -18,7 +20,7 @@ const HotelReg = () => {
     setLoading(true)
 
     try {
-      const { data } = await axios.post('/api/hotel', {
+      const { data } = await axios.post('/api/hotels', {
         name,
         address,
         contact,
@@ -31,6 +33,8 @@ const HotelReg = () => {
         setIsOwner(true);
         toast.success(data.message);
         setShowHotelReg(false);
+        // Redirect to owner dashboard immediately
+        navigate('/owner');
       } else {
         toast.error(data.message);
       }

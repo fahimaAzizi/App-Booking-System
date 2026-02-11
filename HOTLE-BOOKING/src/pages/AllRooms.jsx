@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react'
-import { assets, roomsDummyData } from '../assets/assets'
+import React, { useCallback, useEffect, useState } from 'react'
+import { assets } from '../assets/assets'
 import StarRating from '../components/StarRating'
 import { useNavigate } from 'react-router-dom'
+import { useAppContext } from '../conext/AppContext'
 
 // Memoized CheckBox component
 const CheckBox = React.memo(({ label, selected = false, onChange = () => {} }) => {
@@ -43,15 +44,15 @@ const RoomCard = React.memo(({ room, navigate }) => {
     <div className='flex flex-col md:flex-row gap-6'>
       <img
         onClick={handleClick}
-        src={room.images[0]}
+        src={room.images[0] || assets.roomImg1}
         alt="hotel-img"
         className='max-h-64 md:w-1/2 rounded-xl shadow-lg object-cover cursor-pointer'
       />
 
       <div className='md:w-1/2 flex flex-col gap-2'>
-        <p className='text-gray-500'>{room.hotel.city}</p>
+        <p className='text-gray-500'>{room.hotel?.city || 'Unknown City'}</p>
         <p className='text-gray-800 text-3xl font-playfair'>
-          {room.hotel.name}
+          {room.hotel?.name || 'Hotel Name'}
         </p>
 
         <div className='flex items-center gap-2'>
@@ -61,7 +62,17 @@ const RoomCard = React.memo(({ room, navigate }) => {
 
         <div className='flex items-center gap-2 text-gray-600'>
           <img src={assets.locationIcon} alt="location" />
-          <span>{room.hotel.address}</span>
+          <span>{room.hotel?.address || 'Address'}</span>
+        </div>
+        
+        <div className='flex items-center gap-2 text-gray-600 mt-2'>
+          <span className='font-medium'>Room Type:</span>
+          <span>{room.roomType}</span>
+        </div>
+        
+        <div className='flex items-center gap-2 text-primary font-medium mt-2'>
+          <span className='text-xl'>${room.pricePerNight}</span>
+          <span className='text-sm'>/night</span>
         </div>
       </div>
     </div>
@@ -91,20 +102,47 @@ const sortOptions = [
 
 const AllRooms = () => {
   const navigate = useNavigate()
-  const [openFilters, setOpenFilters] = React.useState(false)
+  const [openFilters, setOpenFilters] = useState(false)
+  const [rooms, setRooms] = useState([])
+  const [loading, setLoading] = useState(true)
+  const { axios } = useAppContext()
 
   const toggleFilters = useCallback(() => {
     setOpenFilters(prev => !prev)
   }, [])
+
+  useEffect(() => {
+    const fetchRooms = async () => {
+      try {
+        const { data } = await axios.get('/api/room')
+        if (data.success) {
+          setRooms(data.rooms)
+        }
+      } catch (error) {
+        console.error('Error fetching rooms:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchRooms()
+  }, [axios])
 
   return (
     <div className='flex flex-col-reverse lg:flex-row items-start justify-between pt-28 md:pt-36 px-4 md:px-16 lg:px-24 xl:px-32'>
 
       {/* ROOMS */}
       <div className='flex flex-col gap-10 w-full lg:w-2/3'>
-        {roomsDummyData.map((room) => (
-          <RoomCard key={room._id} room={room} navigate={navigate} />
-        ))}
+        {loading ? (
+          <div className='flex items-center justify-center py-20'>
+            <div className='animate-spin rounded-full h-12 w-12 border-b-2 border-primary'></div>
+          </div>
+        ) : rooms.length === 0 ? (
+          <p className='text-gray-500 text-center py-20'>No rooms available</p>
+        ) : (
+          rooms.map((room) => (
+            <RoomCard key={room._id} room={room} navigate={navigate} />
+          ))
+        )}
       </div>
 
       {/* FILTERS */}
