@@ -1,7 +1,38 @@
 import Hotel from "../models/Hotel.js";
 import User from "../models/User.js";
 
+// ===============================
+// GET ALL HOTELS (Public)
+// ===============================
+export const getAllHotels = async (req, res) => {
+    try {
+        const hotels = await Hotel.find({}).populate('owner', 'firstName lastName email');
+        res.json({ success: true, hotels });
+    } catch (error) {
+        console.error("Error fetching hotels:", error);
+        res.json({ success: false, message: error.message });
+    }
+};
 
+// ===============================
+// GET SINGLE HOTEL BY ID
+// ===============================
+export const getHotelById = async (req, res) => {
+    try {
+        const hotel = await Hotel.findById(req.params.id).populate('owner', 'firstName lastName email');
+        if (!hotel) {
+            return res.json({ success: false, message: "Hotel not found" });
+        }
+        res.json({ success: true, hotel });
+    } catch (error) {
+        console.error("Error fetching hotel:", error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+// ===============================
+// REGISTER HOTEL
+// ===============================
 export const registerHotel = async (req, res)=>{
     try {
         const {name, address, contact , city} = req.body;
