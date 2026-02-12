@@ -20,25 +20,31 @@ const HotelReg = () => {
     setLoading(true)
 
     try {
-      const { data } = await axios.post('/api/hotels', {
+      const token = await getToken();
+      console.log("Token obtained:", token ? "yes" : "no");
+      
+      const { data } = await axios.post('/hotels', {
         name,
         address,
         contact,
         city
       }, {
-        headers: { Authorization: `Bearer ${await getToken()}` }
+        headers: { Authorization: `Bearer ${token}` }
       })
+
+      console.log("Response:", data);
 
       if (data.success) {
         setIsOwner(true);
         toast.success(data.message);
         setShowHotelReg(false);
-        // Redirect to owner dashboard immediately
         navigate('/owner');
       } else {
         toast.error(data.message);
       }
     } catch (error) {
+      console.error("Registration error:", error);
+      console.error("Error response:", error.response?.data);
       toast.error(error.response?.data?.message || "Registration failed");
     } finally {
       setLoading(false)

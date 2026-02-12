@@ -16,10 +16,16 @@ export const AppProvider = ({ children }) => {
   const [showHotelReg, setShowHotelReg] = useState(false);
   const [searchedCities, setSearchedCities] = useState([]);
 
+  // Create axios instance with base URL
+  const axiosInstance = axios.create({
+    baseURL: import.meta.env.VITE_API_URL || "/api"
+  });
+
   const fetchUser = async () => {
     try {
-      const response = await axios.get('/api/user', {
-        headers: { Authorization: `Bearer ${await getToken()}` }
+      const token = await getToken();
+      const response = await axiosInstance.get('/user', {
+        headers: { Authorization: `Bearer ${token}` }
       });
 
       const data = response.data;
@@ -33,6 +39,7 @@ export const AppProvider = ({ children }) => {
         }, 5000);
       }
     } catch (error) {
+      console.error("Error fetching user:", error);
       toast.error(error.message);
     }
   };
@@ -50,7 +57,7 @@ export const AppProvider = ({ children }) => {
     getToken,
     isOwner,
     setIsOwner,
-    axios,
+    axios: axiosInstance,
     showHotelReg,
     setShowHotelReg,
     searchedCities,
