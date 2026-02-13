@@ -84,7 +84,6 @@ export const getRoomById = async (req, res) => {
     // If hotel has owner, fetch owner details
     if (room.hotel && room.hotel.owner) {
       const owner = await User.findById(room.hotel.owner);
-      // Add owner details to hotel object
       room.hotel.owner = owner;
     }
     

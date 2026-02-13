@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { facilityIcons, roomCommonData } from "../assets/assets";
+import { assets, facilityIcons, roomCommonData } from "../assets/assets";
 import StarRating from "../components/StarRating";
 import { useAppContext } from "../conext/AppContext";
 
@@ -69,7 +69,7 @@ const RoomDetails = () => {
         {/* MAIN IMAGE */}
         <div className="lg:w-1/2 w-full">
           <img
-            src={mainImage}
+            src={mainImage || assets.roomImg1}
             alt="Room"
             className="w-full h-[400px] object-cover rounded-xl shadow-lg"
           />
@@ -77,20 +77,27 @@ const RoomDetails = () => {
 
         {/* THUMBNAILS */}
         <div className="grid grid-cols-2 gap-4 lg:w-1/2 w-full">
-          {room.images && room.images.map((img, index) => (
-            <img
-              key={index}
-              src={img}
-              alt="Room thumbnail"
-              onClick={() => setMainImage(img)}
-              className={`w-full h-[190px] object-cover rounded-xl cursor-pointer shadow-md
-                ${
-                  mainImage === img
-                    ? "outline outline-3 outline-orange-500"
-                    : ""
-                }`}
-            />
-          ))}
+          {room.images && room.images.length > 0 ? (
+            room.images.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt="Room thumbnail"
+                onClick={() => setMainImage(img)}
+                className={`w-full h-[190px] object-cover rounded-xl cursor-pointer shadow-md
+                  ${
+                    mainImage === img
+                      ? "outline outline-3 outline-orange-500"
+                      : ""
+                  }`}
+              />
+            ))
+          ) : (
+            <>
+              <img src={assets.roomImg1} alt="Room" className="w-full h-[190px] object-cover rounded-xl shadow-md" />
+              <img src={assets.roomImg2} alt="Room" className="w-full h-[190px] object-cover rounded-xl shadow-md" />
+            </>
+          )}
         </div>
       </div>
 
