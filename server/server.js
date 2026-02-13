@@ -21,11 +21,14 @@ app.use(clerkMiddleware());
 // ====== DATABASE ======
 const connectDB = async () => {
   try {
-    await mongoose.connect(`${process.env.MONGODB_URI}/hotel-booking`);
+    const uri = process.env.MONGODB_URI.includes('?') 
+      ? process.env.MONGODB_URI 
+      : `${process.env.MONGODB_URI}/hotel-booking`;
+    await mongoose.connect(uri);
     console.log("Database connected ✅");
   } catch (error) {
     console.error("DB connection error:", error.message);
-    process.exit(1);
+    // Don't exit, continue without database
   }
 
   mongoose.connection.on("error", (err) => {
