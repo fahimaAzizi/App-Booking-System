@@ -3,6 +3,7 @@
 import Cloudinary from "../configs/cloudinary.js";
 import Hotel from "../models/Hotel.js";
 import Room from "../models/Room.js";
+import User from "../models/User.js";
 
 // ===============================
 // CREATE A NEW ROOM
@@ -82,7 +83,6 @@ export const getRoomById = async (req, res) => {
     
     // If hotel has owner, fetch owner details
     if (room.hotel && room.hotel.owner) {
-      const User = (await import("../models/User.js")).default;
       const owner = await User.findById(room.hotel.owner);
       // Add owner details to hotel object
       room.hotel.owner = owner;
