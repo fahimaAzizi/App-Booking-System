@@ -75,9 +75,19 @@ export const getRooms = async (req, res) => {
 export const getRoomById = async (req, res) => {
   try {
     const room = await Room.findById(req.params.id).populate('hotel', 'name address city owner');
+    
     if (!room) {
       return res.json({ success: false, message: "Room not found" });
     }
+    
+    // If hotel has owner, fetch owner details
+    if (room.hotel && room.hotel.owner) {
+      const User = (await import("../models/User.js")).default;
+      const owner = await User.findById(room.hotel.owner);
+      // Add owner details to hotel object
+      room.hotel.owner = owner;
+    }
+    
     res.json({ success: true, room });
   } catch (error) {
     res.json({ success: false, message: error.message });
