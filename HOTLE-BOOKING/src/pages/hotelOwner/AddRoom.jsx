@@ -90,7 +90,7 @@ const AddRoom = () => {
       <Title
         align="left"
         font="outfit"
-        title="Add Room"
+        Title="Add Room"
         subTitle="Fill in the details carefully and accurately including room details, pricing, and amenities to enhance the booking experience."
       />
 

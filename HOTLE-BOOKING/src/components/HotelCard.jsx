@@ -9,7 +9,7 @@ const HotelCard = ({room , index}) => {
      {index % 2 === 0 && <p className='px-3 py-1 absolute top-3 left-3 text-xs bg-white text-gray-800 font-medium rounded-full'>Best seller</p>}
       <div>
         <div>
-            <p className='font-playfair text-xl fontmedium text-gray-800'>{room.hotel?.name || 'Hotel Name'}</p>
+            <p className='font-playfair text-xl font-medium text-gray-800'>{room.hotel?.name || 'Hotel Name'}</p>
             <div className='flex items-center gap-1'>
                 <img src={assets.starIconFilled} alt=" star-icon" />
                 4.5

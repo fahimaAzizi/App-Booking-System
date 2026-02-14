@@ -2,6 +2,7 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 import mongoose from "mongoose";
+
 import connectCloudinary from "./configs/cloudinary.js";
 import { clerkMiddleware } from "@clerk/express";
 import userRouter from "./routes/userRoutes.js";
@@ -9,8 +10,6 @@ import hotelRouter from "./routes/hotelRoutes.js";
 import roomRouter from "./routes/roomRoutes.js";
 import bookingRouter from "./routes/bookingRouter.js";
 import clerkWebhooks from "./controllers/clerkWebhooks.js";
-
-
 
 const app = express();
 
@@ -22,14 +21,11 @@ app.use(clerkMiddleware());
 // ====== DATABASE ======
 const connectDB = async () => {
   try {
-    const uri = process.env.MONGODB_URI.includes('?') 
-      ? process.env.MONGODB_URI 
-      : `${process.env.MONGODB_URI}/hotel-booking`;
-    await mongoose.connect(uri);
+    await mongoose.connect(`${process.env.MONGODB_URI}/hotel-booking`);
     console.log("Database connected ✅");
   } catch (error) {
     console.error("DB connection error:", error.message);
-    // Don't exit, continue without database
+    process.exit(1);
   }
 
   mongoose.connection.on("error", (err) => {

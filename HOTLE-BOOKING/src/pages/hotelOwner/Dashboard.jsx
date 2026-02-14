@@ -44,7 +44,7 @@ const Dashboard = () => {
       <Title
         align="left"
         font="outfit"
-        title="Dashboard"
+        Title="Dashboard"
         subTitle="Monitor your room listings, track bookings and analyze revenue—all in one place. Stay updated with real-time insights to ensure smooth operations."
       />
 

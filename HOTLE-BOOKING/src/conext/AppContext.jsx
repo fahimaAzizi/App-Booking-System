@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser, useAuth } from "@clerk/clerk-react";
 import axios from "axios";
@@ -17,26 +17,30 @@ export const AppProvider = ({ children }) => {
   const [showHotelReg, setShowHotelReg] = useState(false);
   const [searchedCities, setSearchedCities] = useState([]);
 
-  // ✅ Axios instance (FIXED)
-  const axiosInstance = axios.create({
-    baseURL:
-      import.meta.env.VITE_API_URL || "http://localhost:5000/api",
-  });
+  // ✅ Memoized Axios instance
+  const axiosInstance = useMemo(() => axios.create({
+    baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+  }), []);
+
+  // ✅ Axios interceptor to attach token automatically
+  useEffect(() => {
+    const requestInterceptor = axiosInstance.interceptors.request.use(async (config) => {
+      const token = await getToken();
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    });
+
+    return () => {
+      axiosInstance.interceptors.request.eject(requestInterceptor);
+    };
+  }, [getToken, axiosInstance]);
 
   // ✅ Fetch logged-in user data
-  const fetchUser = async () => {
+  const fetchUser = useCallback(async () => {
     try {
-      const token = await getToken();
-
-      // stop if no token
-      if (!token) return;
-
-      const response = await axiosInstance.get("/user", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
+      const response = await axiosInstance.get("/user"); // matches backend: /api/user
       const data = response.data;
 
       if (data.success) {
@@ -44,19 +48,17 @@ export const AppProvider = ({ children }) => {
         setSearchedCities(data.recentSearchedCities || []);
       }
     } catch (error) {
-      console.error("Error fetching user:", error);
-      toast.error(
-        error.response?.data?.message || "Failed to load user"
-      );
+     
+      toast.error(error.response?.data?.message || "Failed to load user");
     }
-  };
+  }, [axiosInstance]);
 
   // ✅ Run when user logs in
   useEffect(() => {
     if (user) {
       fetchUser();
     }
-  }, [user]);
+  }, [user, fetchUser]);
 
   // ✅ Context values
   const value = {
@@ -73,11 +75,7 @@ export const AppProvider = ({ children }) => {
     setSearchedCities,
   };
 
-  return (
-    <AppContext.Provider value={value}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
 // ✅ Custom Hook
