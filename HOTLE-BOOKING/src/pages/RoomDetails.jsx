@@ -10,6 +10,15 @@ const RoomDetails = () => {
   const [mainImage, setMainImage] = useState("");
   const [loading, setLoading] = useState(true);
   const { axios } = useAppContext();
+  
+  // Lightbox state
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
+  // Get all images for the gallery
+  const allImages = room?.images && room.images.length > 0 
+    ? room.images 
+    : [assets.roomImg1, assets.roomImg2, assets.roomImg3, assets.roomImg4];
 
   useEffect(() => {
     const fetchRoom = async () => {
@@ -29,6 +38,26 @@ const RoomDetails = () => {
     };
     fetchRoom();
   }, [id, axios]);
+
+  // Lightbox navigation functions
+  const openLightbox = (index) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  const nextImage = (e) => {
+    e?.stopPropagation();
+    setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
+  };
+
+  const prevImage = (e) => {
+    e?.stopPropagation();
+    setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length);
+  };
 
   if (loading) {
     return (
@@ -66,13 +95,15 @@ const RoomDetails = () => {
       {/* IMAGES */}
       <div className="flex flex-col lg:flex-row gap-6 mt-6">
 
-        {/* MAIN IMAGE */}
+        {/* MAIN IMAGE - Clickable to open lightbox */}
         <div className="lg:w-1/2 w-full">
           <img
             src={mainImage || assets.roomImg1}
             alt="Room"
-            className="w-full h-[400px] object-cover rounded-xl shadow-lg"
+            className="w-full h-[400px] object-cover rounded-xl shadow-lg cursor-pointer hover:opacity-95 transition-opacity"
+            onClick={() => openLightbox(allImages.indexOf(mainImage) >= 0 ? allImages.indexOf(mainImage) : 0)}
           />
+          <p className="text-sm text-gray-500 mt-2 text-center">Click on image to view all photos</p>
         </div>
 
         {/* THUMBNAILS */}
@@ -219,6 +250,81 @@ const RoomDetails = () => {
         </button>
 
       </div>
+
+      {/* LIGHTBOX GALLERY */}
+      {lightboxOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
+          onClick={closeLightbox}
+        >
+          {/* CLOSE BUTTON */}
+          <button 
+            className="absolute top-4 right-4 text-white hover:text-gray-300 z-50"
+            onClick={closeLightbox}
+          >
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* PREV BUTTON */}
+          <button 
+            className="absolute left-4 text-white hover:text-gray-300 z-50 p-2 bg-black bg-opacity-50 rounded-full"
+            onClick={prevImage}
+          >
+            <svg className="w-8 h-8 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* MAIN LIGHTBOX IMAGE */}
+          <div 
+            className="max-w-4xl max-h-[80vh] px-16"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={allImages[currentImageIndex]}
+              alt={`Room ${currentImageIndex + 1}`}
+              className="max-w-full max-h-[80vh] object-contain rounded-lg"
+            />
+          </div>
+
+          {/* NEXT BUTTON */}
+          <button 
+            className="absolute right-4 text-white hover:text-gray-300 z-50 p-2 bg-black bg-opacity-50 rounded-full"
+            onClick={nextImage}
+          >
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* IMAGE COUNTER */}
+          <div className="absolute bottom-4 text-white text-sm">
+            {currentImageIndex + 1} / {allImages.length}
+          </div>
+
+          {/* THUMBNAILS */}
+          <div className="absolute bottom-12 flex gap-2 justify-center">
+            {allImages.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`Thumbnail ${index + 1}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentImageIndex(index);
+                }}
+                className={`w-16 h-16 object-cover rounded cursor-pointer transition-all ${
+                  currentImageIndex === index 
+                    ? "outline outline-2 outline-white opacity-100" 
+                    : "opacity-50 hover:opacity-80"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      )}
 
     </div>
   );

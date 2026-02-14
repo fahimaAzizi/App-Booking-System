@@ -9,6 +9,7 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const currency = import.meta.env.VITE_CURRENCY || "$";
   const navigate = useNavigate();
+
   const { user } = useUser();
   const { getToken } = useAuth();
 
@@ -16,40 +17,48 @@ export const AppProvider = ({ children }) => {
   const [showHotelReg, setShowHotelReg] = useState(false);
   const [searchedCities, setSearchedCities] = useState([]);
 
-  // Create axios instance with base URL
+  // ✅ Axios instance (FIXED)
   const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || "/api"
+    baseURL:
+      import.meta.env.VITE_API_URL || "http://localhost:5000/api",
   });
 
+  // ✅ Fetch logged-in user data
   const fetchUser = async () => {
     try {
       const token = await getToken();
-      const response = await axiosInstance.get('/user', {
-        headers: { Authorization: `Bearer ${token}` }
+
+      // stop if no token
+      if (!token) return;
+
+      const response = await axiosInstance.get("/user", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       const data = response.data;
 
       if (data.success) {
         setIsOwner(data.role === "hotelOwner");
-        setSearchedCities(data.recentSearchedCities);
-      } else {
-        setTimeout(() => {
-          fetchUser();
-        }, 5000);
+        setSearchedCities(data.recentSearchedCities || []);
       }
     } catch (error) {
       console.error("Error fetching user:", error);
-      toast.error(error.message);
+      toast.error(
+        error.response?.data?.message || "Failed to load user"
+      );
     }
   };
 
+  // ✅ Run when user logs in
   useEffect(() => {
     if (user) {
       fetchUser();
     }
   }, [user]);
 
+  // ✅ Context values
   const value = {
     currency,
     navigate,
@@ -71,5 +80,5 @@ export const AppProvider = ({ children }) => {
   );
 };
 
-// Custom hook
+// ✅ Custom Hook
 export const useAppContext = () => useContext(AppContext);

@@ -2,7 +2,6 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 import mongoose from "mongoose";
-
 import connectCloudinary from "./configs/cloudinary.js";
 import { clerkMiddleware } from "@clerk/express";
 import userRouter from "./routes/userRoutes.js";
@@ -10,6 +9,8 @@ import hotelRouter from "./routes/hotelRoutes.js";
 import roomRouter from "./routes/roomRoutes.js";
 import bookingRouter from "./routes/bookingRouter.js";
 import clerkWebhooks from "./controllers/clerkWebhooks.js";
+
+
 
 const app = express();
 

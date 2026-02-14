@@ -23,7 +23,7 @@ const HotelReg = () => {
       const token = await getToken();
       console.log("Token obtained:", token ? "yes" : "no");
       
-      const { data } = await axios.post('/hotels', {
+      const { data } = await axios.post('/api/hotels', {
         name,
         address,
         contact,
